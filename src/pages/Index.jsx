@@ -1,11 +1,37 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+
+const topics = [
+  { id: 1, title: 'Science', image: '/placeholder.svg' },
+  { id: 2, title: 'History', image: '/placeholder.svg' },
+  { id: 3, title: 'Technology', image: '/placeholder.svg' },
+  { id: 4, title: 'Arts', image: '/placeholder.svg' },
+  { id: 5, title: 'Sports', image: '/placeholder.svg' },
+];
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handleTopicClick = (topicId) => {
+    navigate(`/article/${topicId}`);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+      <h1 className="text-4xl font-bold mb-8 text-center">Welcome to the Interactive Article Reader</h1>
+      <p className="text-xl text-gray-600 mb-8 text-center">Choose a topic to start reading and analyzing articles:</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {topics.map((topic) => (
+          <Button
+            key={topic.id}
+            onClick={() => handleTopicClick(topic.id)}
+            className="w-48 h-48 flex flex-col items-center justify-center text-center p-4 bg-white hover:bg-gray-50"
+          >
+            <img src={topic.image} alt={topic.title} className="w-24 h-24 mb-2" />
+            <span className="text-lg font-semibold">{topic.title}</span>
+          </Button>
+        ))}
       </div>
     </div>
   );
