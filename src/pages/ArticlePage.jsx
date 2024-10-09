@@ -36,6 +36,7 @@ const ArticlePage = () => {
   };
 
   const handleDrop = (index, word) => {
+    if (!isTimerRunning) return;
     setDroppedWords((prev) => {
       const newDroppedWords = [...prev];
       newDroppedWords[index] = word;
@@ -56,7 +57,7 @@ const ArticlePage = () => {
         </div>
         <div className="mb-8">
           {article.content.split(' ').map((word, index) => (
-            <DraggableWord key={index} word={word} />
+            <DraggableWord key={index} word={word} disabled={!isTimerRunning} />
           ))}
         </div>
         <div className="grid grid-cols-5 gap-4">

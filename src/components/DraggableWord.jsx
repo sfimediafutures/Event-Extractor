@@ -1,15 +1,23 @@
 import React from 'react';
 
-const DraggableWord = ({ word }) => {
+const DraggableWord = ({ word, disabled }) => {
   const handleDragStart = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
     e.dataTransfer.setData('text/plain', word);
   };
 
   return (
     <span
-      draggable
+      draggable={!disabled}
       onDragStart={handleDragStart}
-      className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded m-1 cursor-move"
+      className={`inline-block px-2 py-1 rounded m-1 ${
+        disabled
+          ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+          : 'bg-blue-100 text-blue-800 cursor-move'
+      }`}
     >
       {word}
     </span>
