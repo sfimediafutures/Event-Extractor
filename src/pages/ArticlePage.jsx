@@ -15,9 +15,9 @@ const ArticlePage = () => {
   useEffect(() => {
     // Simulating article fetch based on topicId
     setArticle({
-      title: `Article about Topic ${topicId}`,
-      content: 'This is a sample article content. You can drag and drop important words from here.',
-      instruction: 'Identify the 5 most important words in this article and drag them to the boxes below.'
+      title: `Article about ${topicId}`,
+      content: 'This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.',
+      instruction: 'Start the timer and drag the correct words from the text to the boxes.'
     });
   }, [topicId]);
 
