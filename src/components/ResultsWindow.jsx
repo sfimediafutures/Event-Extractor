@@ -17,18 +17,22 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
     }
   };
 
-  const uniqueTimes = [...times, savedTime]
+  const allTimes = savedTime
+    ? [...times, savedTime]
+    : times;
+
+  const sortedTimes = allTimes
     .filter(Boolean)
-    .reduce((acc, curr) => {
-      const existingIndex = acc.findIndex(t => t.name === curr.name);
-      if (existingIndex !== -1) {
-        acc[existingIndex] = curr;
-      } else {
-        acc.push(curr);
-      }
-      return acc;
-    }, [])
     .sort((a, b) => a.time - b.time);
+
+  const topTimes = sortedTimes.slice(0, 15);
+  const userRank = sortedTimes.findIndex(t => t.time === time) + 1;
+
+  const renderTimeEntry = (entry, index) => (
+    <li key={index} className={entry.time === time ? 'font-bold' : ''}>
+      Rank {index + 1}: {entry.name} - {entry.time} seconds [{entry.articleTitle}]
+    </li>
+  );
 
   const handleBackToStart = () => {
     window.location.href = '/';
@@ -41,14 +45,15 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
           <>
             <h2 className="text-2xl font-bold mb-4">Your Results</h2>
             <p className="mb-4">Your time: {time} seconds</p>
-            <h3 className="text-xl font-semibold mb-2">Ranking</h3>
+            <h3 className="text-xl font-semibold mb-2">Highscores</h3>
             <ul className="list-disc pl-5 mb-4">
-              {uniqueTimes.map((t, index) => (
-                <li key={index} className={t.time === time ? 'font-bold' : ''}>
-                  {t.name}: {t.time} seconds [{t.articleTitle || currentArticleTitle}] {t.time === time && !savedTime ? '(Your Time)' : ''}
-                </li>
-              ))}
+              {topTimes.map((t, index) => renderTimeEntry(t, index))}
             </ul>
+            {userRank > 15 && (
+              <p className="mb-4">
+                Your rank: {userRank} - {savedTime ? savedTime.name : 'You'}: {time} seconds [{currentArticleTitle}]
+              </p>
+            )}
             <p className="mb-4 text-sm italic">
               The Event Extractor model can complete this task in under a second, saving you valuable time.
               <Button
