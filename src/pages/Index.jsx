@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <h1 className="text-4xl font-bold mb-8 text-center">Velkommen til Event Extractor demoen!</h1>
-      <p className="text-xl text-gray-600 mb-8 text-center">Velg en artikkel som du synes høres interessant ut og start demoen</p>
+      <p className="text-xl text-gray-600 mb-8 text-center">Velg en artikkel som du synes høres interessant ut for å starte demoen</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {topics.map((topic) => (
           <Button
