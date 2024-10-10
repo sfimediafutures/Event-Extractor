@@ -17,7 +17,7 @@ const ArticlePage = () => {
     setArticle({
       title: `Article about ${topicId}`,
       content: 'This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.This is a sample article content. You can drag and drop important words from here.',
-      instruction: 'Start the timer and drag the correct words from the text to the boxes.'
+      instruction: 'Start tidtakeren, og dra de riktige ordene fra teksten til boksene.'
     });
   }, [topicId]);
 
