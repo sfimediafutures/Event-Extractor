@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import DraggableWord from '@/components/DraggableWord';
@@ -11,26 +11,31 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 const fetchArticle = async (topicId) => {
   // Simulating API call
   return {
-    title: `${topicId}`,
+    title: `Article about Topic ${topicId}`,
     content: 'This is a sample article content. You can drag and drop important words from here.',
-    instruction: 'Finn de riktige ordene og dra de til boksene. Klikk på knappen for å starte og klikk igjen for å stoppe tidtakeren.'
+    instruction: 'Identify the 5 most important words in this article and drag them to the boxes below.'
   };
 };
 
-const fetchTimes = async (topicId) => {
-  // Simulating API call to fetch times
-  return [15, 20, 25, 30, 35]; // Example times in seconds
+const fetchTimes = () => {
+  const storedTimes = localStorage.getItem('savedTimes');
+  return storedTimes ? JSON.parse(storedTimes) : [];
 };
 
-const saveTime = async ({ topicId, time, name }) => {
-  // Simulating API call to save time
-  console.log(`Saving time ${time} for ${name} on topic ${topicId}`);
+const saveTime = ({ time, name, articleTitle }) => {
+  const times = fetchTimes();
+  const existingIndex = times.findIndex(t => t.name === name);
+  if (existingIndex !== -1) {
+    times[existingIndex] = { name, time, articleTitle };
+  } else {
+    times.push({ name, time, articleTitle });
+  }
+  localStorage.setItem('savedTimes', JSON.stringify(times));
   return { success: true };
 };
 
 const ArticlePage = () => {
   const { topicId } = useParams();
-  const navigate = useNavigate();
   const [article, setArticle] = useState({ title: '', content: '', instruction: '' });
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -39,14 +44,14 @@ const ArticlePage = () => {
   const queryClient = useQueryClient();
 
   const { data: times = [] } = useQuery({
-    queryKey: ['times', topicId],
-    queryFn: () => fetchTimes(topicId),
+    queryKey: ['times'],
+    queryFn: fetchTimes,
   });
 
   const saveMutation = useMutation({
     mutationFn: saveTime,
     onSuccess: () => {
-      queryClient.invalidateQueries(['times', topicId]);
+      queryClient.invalidateQueries(['times']);
     },
   });
 
@@ -85,9 +90,7 @@ const ArticlePage = () => {
   };
 
   const handleSaveTime = (name) => {
-    saveMutation.mutate({ topicId, time: timer, name });
-    setShowResults(false);
-    navigate('/');
+    saveMutation.mutate({ time: timer, name, articleTitle: article.title });
   };
 
   const allBoxesFilled = droppedWords.every(word => word !== null);
@@ -121,7 +124,7 @@ const ArticlePage = () => {
           time={timer}
           times={times}
           onSave={handleSaveTime}
-          onClose={() => setShowResults(false)}
+          currentArticleTitle={article.title}
         />
       )}
     </div>
