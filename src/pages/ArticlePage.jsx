@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { motion, AnimatePresence } from 'framer-motion';
 import DraggableWord from '@/components/DraggableWord';
 import DropBox from '@/components/DropBox';
 import ResultsWindow from '@/components/ResultsWindow';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-// Simulated API functions (replace with actual API calls in a real application)
 const fetchArticle = async (topicId) => {
   // Simulating API call
   return {
@@ -41,6 +42,8 @@ const ArticlePage = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [droppedWords, setDroppedWords] = useState(Array(5).fill(null));
   const [showResults, setShowResults] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [modelDone, setModelDone] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: times = [] } = useQuery({
@@ -69,6 +72,23 @@ const ArticlePage = () => {
     return () => clearInterval(interval);
   }, [isTimerRunning]);
 
+  useEffect(() => {
+    let progressInterval;
+    if (isTimerRunning && progress < 100) {
+      progressInterval = setInterval(() => {
+        setProgress((prevProgress) => {
+          if (prevProgress >= 100) {
+            clearInterval(progressInterval);
+            setModelDone(true);
+            return 100;
+          }
+          return prevProgress + 1;
+        });
+      }, 40); // 4000ms / 100 = 40ms per 1% increase
+    }
+    return () => clearInterval(progressInterval);
+  }, [isTimerRunning, progress]);
+
   const handleStartStop = () => {
     if (isTimerRunning && droppedWords.every(word => word !== null)) {
       setIsTimerRunning(false);
@@ -77,6 +97,8 @@ const ArticlePage = () => {
       setIsTimerRunning(true);
       setTimer(0);
       setDroppedWords(Array(5).fill(null));
+      setProgress(0);
+      setModelDone(false);
     }
   };
 
@@ -105,6 +127,22 @@ const ArticlePage = () => {
             {isTimerRunning ? 'Stop' : 'Start'}
           </Button>
           <span className="ml-4 text-xl">Timer: {timer}s</span>
+        </div>
+        <div className="mb-4 flex items-center">
+          <Progress value={progress} className="w-full h-4 mr-4" />
+          <AnimatePresence>
+            {modelDone && (
+              <motion.span
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                className="text-green-600 font-semibold"
+              >
+                Done!
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
         <div className="mb-8">
           {article.content.split(' ').map((word, index) => (

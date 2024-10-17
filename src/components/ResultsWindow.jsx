@@ -23,14 +23,32 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
 
   const sortedTimes = allTimes
     .filter(Boolean)
-    .sort((a, b) => a.time - b.time);
+    .sort((a, b) => a.time - b.time)
+    .reduce((acc, current) => {
+      const x = acc.find(item => item.name === current.name);
+      if (!x) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
 
   const topTimes = sortedTimes.slice(0, 15);
-  const userRank = sortedTimes.findIndex(t => t.time === time) + 1;
+  const userRank = sortedTimes.findIndex(t => t.name === savedTime?.name && t.time === savedTime?.time) + 1;
+
+  const getRankIcon = (index) => {
+    switch (index) {
+      case 0: return '🥇';
+      case 1: return '🥈';
+      case 2: return '🥉';
+      default: return `${index + 1}.`;
+    }
+  };
 
   const renderTimeEntry = (entry, index) => (
-    <li key={index} className={entry.time === time ? 'font-bold' : ''}>
-      Rank {index + 1}: {entry.name} - {entry.time} seconds [{entry.articleTitle}]
+    <li key={index} className={entry.name === savedTime?.name && entry.time === savedTime?.time ? 'font-bold' : ''}>
+      <span className="mr-2">{getRankIcon(index)}</span>
+      {entry.name} - {entry.time} seconds [{entry.articleTitle}]
     </li>
   );
 
@@ -46,9 +64,9 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
             <h2 className="text-2xl font-bold mb-4">Your Results</h2>
             <p className="mb-4">Your time: {time} seconds</p>
             <h3 className="text-xl font-semibold mb-2">Highscores</h3>
-            <ul className="list-disc pl-5 mb-4">
+            <ol className="list-none pl-0 mb-4">
               {topTimes.map((t, index) => renderTimeEntry(t, index))}
-            </ul>
+            </ol>
             {userRank > 15 && (
               <p className="mb-4">
                 Your rank: {userRank} - {savedTime ? savedTime.name : 'You'}: {time} seconds [{currentArticleTitle}]
