@@ -8,12 +8,16 @@ import DraggableWord from '@/components/DraggableWord';
 import DropBox from '@/components/DropBox';
 import ResultsWindow from '@/components/ResultsWindow';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import data from "../../example_docs/example_doc1.json";
+
+const textArray = data.doc_text;
+const combinedText = textArray.join(' ');
 
 const fetchArticle = async (topicId) => {
   // Simulating API call
   return {
     title: `Article about Topic ${topicId}`,
-    content: 'This is a sample article content. You can drag and drop important words from here.',
+    content: combinedText,
     instruction: 'Identify the 5 most important words in this article and drag them to the boxes below.'
   };
 };
