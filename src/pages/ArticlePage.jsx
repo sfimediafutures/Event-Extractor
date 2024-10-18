@@ -8,13 +8,31 @@ import DraggableWord from '@/components/DraggableWord';
 import DropBox from '@/components/DropBox';
 import ResultsWindow from '@/components/ResultsWindow';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import data from "../../example_docs/example_doc1.json";
+import data from "../../example_docs/example_doc1.json"; // Ensure this path is correct
 
-const textArray = data.doc_text;
-const combinedText = textArray.join(' ');
+// Split words and punctuation
+const splitWordsAndPunctuation = (textArray) => {
+  const regex = /(\w+)([.,!?;:"]*)/g;
+  let result = [];
 
+  textArray.forEach((item) => {
+    let match;
+    while ((match = regex.exec(item)) !== null) {
+      // Push the word and punctuation as separate items
+      if (match[1]) result.push(match[1]); // Word
+      if (match[2]) result.push(match[2]); // Punctuation
+    }
+  });
+
+  return result;
+};
+
+const textArray = data.doc_text; // Assuming doc_text is an array of strings
+const splitTextArray = splitWordsAndPunctuation(textArray);
+const combinedText = splitTextArray.join(''); // Joins words and punctuation without spaces
+
+// Simulate fetching the article content
 const fetchArticle = async (topicId) => {
-  // Simulating API call
   return {
     title: `Article about Topic ${topicId}`,
     content: combinedText,
@@ -123,7 +141,7 @@ const ArticlePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <Card className="max-w-4xl mx-auto p-6">
+      <Card className="max-w-full mx-auto p-6">
         <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
         <p className="text-lg mb-6">{article.instruction}</p>
         <div className="mb-6">
@@ -149,8 +167,8 @@ const ArticlePage = () => {
           </AnimatePresence>
         </div>
         <div className="mb-8">
-          {article.content.split(' ').map((word, index) => (
-            <DraggableWord key={index} word={word} disabled={!isTimerRunning} />
+          {splitTextArray.map((word, index) => (
+            <DraggableWord key={index} word={word} disabled={!isTimerRunning || /[.,!?;:"]/.test(word)} />
           ))}
         </div>
         <div className="grid grid-cols-5 gap-4 mb-8">
