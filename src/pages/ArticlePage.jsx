@@ -1,59 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import DropBox from "@/components/DropBox";
+import ResultsWindow from "@/components/ResultsWindow";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import data from "@/example_docs/example_doc1.json";
 import DraggableWord from '@/components/DraggableWord';
-import DropBox from '@/components/DropBox';
-import ResultsWindow from '@/components/ResultsWindow';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import data from "../../example_docs/example_doc1.json"; // Ensure this path is correct
+import DraggableWordWithPunctuation from '@/components/DraggableWordWithPunctuation';
+import ProgressBar from '@/components/ProgressBar';
 
-// Split words and punctuation
+const textArray = data.doc_text;
+
 const splitWordsAndPunctuation = (textArray) => {
-  const regex = /(\w+)([.,!?;:"]*)/g;
+  const regex = /(\S+)([.,!?;:"""«»\s]*)/g;
   let result = [];
-
   textArray.forEach((item) => {
+    console.log(item);
     let match;
     while ((match = regex.exec(item)) !== null) {
-      // Push the word and punctuation as separate items
-      if (match[1]) result.push(match[1]); // Word
-      if (match[2]) result.push(match[2]); // Punctuation
+      // console.log(match[1]);
+      console.log(match[2]);
+      result.push({ word: match[1], punctuation: match[2].trimStart()+ ' '  });
     }
   });
-
   return result;
 };
 
-const textArray = data.doc_text; // Assuming doc_text is an array of strings
 const splitTextArray = splitWordsAndPunctuation(textArray);
-const combinedText = splitTextArray.join(''); // Joins words and punctuation without spaces
+const combinedText = textArray.join("");
 
-// Simulate fetching the article content
 const fetchArticle = async (topicId) => {
   return {
     title: `Article about Topic ${topicId}`,
     content: combinedText,
-    instruction: 'Identify the 5 most important words in this article and drag them to the boxes below.'
+    instruction: "Identify the 5 most important words in this article and drag them to the boxes below."
   };
 };
 
 const fetchTimes = () => {
-  const storedTimes = localStorage.getItem('savedTimes');
+  const storedTimes = localStorage.getItem("savedTimes");
   return storedTimes ? JSON.parse(storedTimes) : [];
 };
 
 const saveTime = ({ time, name, articleTitle }) => {
   const times = fetchTimes();
-  const existingIndex = times.findIndex(t => t.name === name);
+  const existingIndex = times.findIndex((t) => t.name === name);
   if (existingIndex !== -1) {
     times[existingIndex] = { name, time, articleTitle };
   } else {
     times.push({ name, time, articleTitle });
   }
-  localStorage.setItem('savedTimes', JSON.stringify(times));
+  localStorage.setItem("savedTimes", JSON.stringify(times));
   return { success: true };
 };
 
@@ -137,7 +135,8 @@ const ArticlePage = () => {
     saveMutation.mutate({ time: timer, name, articleTitle: article.title });
   };
 
-  const allBoxesFilled = droppedWords.every(word => word !== null);
+  const allBoxesFilled = droppedWords.every((word) => word !== null);
+
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -146,29 +145,26 @@ const ArticlePage = () => {
         <p className="text-lg mb-6">{article.instruction}</p>
         <div className="mb-6">
           <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
-            {isTimerRunning ? 'Stop' : 'Start'}
+            {isTimerRunning ? "Stop" : "Start"}
           </Button>
           <span className="ml-4 text-xl">Timer: {timer}s</span>
         </div>
-        <div className="mb-4 flex items-center">
-          <Progress value={progress} className="w-full h-4 mr-4" />
-          <AnimatePresence>
-            {modelDone && (
-              <motion.span
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                className="text-green-600 font-semibold"
-              >
-                Done!
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
+        <ProgressBar progress={progress} modelDone={modelDone} />
         <div className="mb-8">
-          {splitTextArray.map((word, index) => (
-            <DraggableWord key={index} word={word} disabled={!isTimerRunning || /[.,!?;:"]/.test(word)} />
+          {splitTextArray.map((item, index) => (
+            // <DraggableWordWithPunctuation
+            //   key={index}
+            //   item={item}
+            //   isTimerRunning={isTimerRunning}
+            // />
+            <React.Fragment key={index}>
+              <DraggableWord            
+                word={item.word}        
+                disabled={!isTimerRunning}
+              />
+
+              <span>{item.punctuation}</span>
+            </React.Fragment>
           ))}
         </div>
         <div className="grid grid-cols-5 gap-4 mb-8">
