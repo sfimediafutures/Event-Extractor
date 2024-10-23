@@ -15,10 +15,9 @@ const ModelInfo = () => {
         Key features:
       </p>
       <ul className="list-disc pl-5 mb-4">
-        <li>Rapid processing (under 1 second per article)</li>
+        <li>Rapid processing (4 seconds per article)</li>
         <li>High accuracy in identifying important information</li>
-        <li>Ability to handle various text formats and lengths</li>
-        <li>Continuous learning and improvement from new data</li>
+        <li>Ability to handle various text formats, lengths and languages</li>
       </ul>
     </div>
   );
