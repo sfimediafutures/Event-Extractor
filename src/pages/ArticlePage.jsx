@@ -44,7 +44,7 @@ const fetchArticle = async (topicId) => {
   return {
     title: article.title,
     content: combinedText,
-    instruction: "Finn og dra passende ord eller uttrykk i teksten til riktig boks."
+    instruction: "Finn og dra passende ord eller uttrykk fra teksten til riktig boks."
   };
 };
 
@@ -155,7 +155,7 @@ const ArticlePage = () => {
         <h1 className="flex justify-center text-3xl font-bold mb-4">{article.title}</h1>
         <div className="flex mb-6"> {/* Flex container for boxes and article text */}
           <div className="flex-none flex flex-col justify-top gap-4 min-w-36"> {/* Box container */}
-            {["Who", "When", "What", "Why", "How"].map((label, index) => (
+            {["Who", "Where", "When", "What", "Why"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                 {droppedWords[index] || label} {/* Show dropped word or label */}
               </DropBox>
