@@ -5,34 +5,44 @@ import { Card } from "@/components/ui/card";
 import DropBox from "@/components/DropBox";
 import ResultsWindow from "@/components/ResultsWindow";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import data from "@/example_docs/example_doc1.json";
 import DraggableWord from '@/components/DraggableWord';
 import DraggableWordWithPunctuation from '@/components/DraggableWordWithPunctuation';
 import ProgressBar from '@/components/ProgressBar';
 
-const textArray = data.doc_text;
+// Import the example documents
+import doc1 from "@/example_docs/example_doc1.json";
+import doc2 from "@/example_docs/example_doc2.json";
+import doc3 from "@/example_docs/example_doc3.json";
+import doc4 from "@/example_docs/example_doc4.json";
+import doc5 from "@/example_docs/example_doc5.json";
+
+const articleData = [
+  { doc: doc1, title: "Er vi redde for moral?" },
+  { doc: doc2, title: "Placeholder" },
+  { doc: doc3, title: "Heavyrockens Elvis Presley" },
+  { doc: doc4, title: "Innbytterne avgjorde for AaFK!" },
+  { doc: doc5, title: "Placeholder nr2" }
+];
 
 const splitWordsAndPunctuation = (textArray) => {
   const regex = /(\S+)([.,!?;:"""«»\s]*)/g;
   let result = [];
   textArray.forEach((item) => {
-    console.log(item);
     let match;
     while ((match = regex.exec(item)) !== null) {
-      // console.log(match[1]);
-      console.log(match[2]);
-      result.push({ word: match[1], punctuation: match[2].trimStart()+ ' '  });
+      result.push({ word: match[1], punctuation: match[2].trimStart() + ' ' });
     }
   });
   return result;
 };
 
-const splitTextArray = splitWordsAndPunctuation(textArray);
-const combinedText = textArray.join("");
-
 const fetchArticle = async (topicId) => {
+  const article = articleData[topicId - 1]; // Adjusting for 0-based indexing
+  const textArray = article.doc.doc_text;
+  const combinedText = textArray.join("");
+
   return {
-    title: `Article about Topic ${topicId}`,
+    title: article.title,
     content: combinedText,
     instruction: "Identify the 5 most important words in this article and drag them to the boxes below."
   };
@@ -137,7 +147,6 @@ const ArticlePage = () => {
 
   const allBoxesFilled = droppedWords.every((word) => word !== null);
 
-
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <Card className="max-w-full mx-auto p-6">
@@ -151,18 +160,12 @@ const ArticlePage = () => {
         </div>
         <ProgressBar progress={progress} modelDone={modelDone} />
         <div className="mb-8">
-          {splitTextArray.map((item, index) => (
-            // <DraggableWordWithPunctuation
-            //   key={index}
-            //   item={item}
-            //   isTimerRunning={isTimerRunning}
-            // />
+          {splitWordsAndPunctuation(article.content.split(/\r?\n/)).map((item, index) => (
             <React.Fragment key={index}>
-              <DraggableWord            
-                word={item.word}        
+              <DraggableWord
+                word={item.word}
                 disabled={!isTimerRunning}
               />
-
               <span>{item.punctuation}</span>
             </React.Fragment>
           ))}

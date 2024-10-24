@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const topics = [
-  { id: 1, title: 'Science', image: '/placeholder.svg' },
-  { id: 2, title: 'History', image: '/placeholder.svg' },
-  { id: 3, title: 'Technology', image: '/placeholder.svg' },
-  { id: 4, title: 'Arts', image: '/placeholder.svg' },
-  { id: 5, title: 'Sports', image: '/placeholder.svg' },
+  { id: 1, title: 'Er vi redde for moral?', image: '/placeholder.svg' },
+  { id: 2, title: 'Placeholder', image: '/placeholder.svg' },
+  { id: 3, title: 'Heavyrockens Elvis Presley', image: '/placeholder.svg' },
+  { id: 4, title: 'Innbytterne avgjorde for AaFK!', image: '/placeholder.svg' },
+  { id: 5, title: 'Placeholder', image: '/placeholder.svg' },
 ];
 
 const Index = () => {
