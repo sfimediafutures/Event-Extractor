@@ -6,7 +6,6 @@ import DropBox from "@/components/DropBox";
 import ResultsWindow from "@/components/ResultsWindow";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DraggableWord from '@/components/DraggableWord';
-import DraggableWordWithPunctuation from '@/components/DraggableWordWithPunctuation';
 import ProgressBar from '@/components/ProgressBar';
 
 // Import the example documents
@@ -149,33 +148,41 @@ const ArticlePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <Card className="max-w-full mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
-        <p className="text-lg mb-6">{article.instruction}</p>
-        <div className="mb-6">
-          <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
-            {isTimerRunning ? "Stop" : "Start"}
-          </Button>
-          <span className="ml-4 text-xl">Timer: {timer}s</span>
-        </div>
-        <ProgressBar progress={progress} modelDone={modelDone} />
-        <div className="mb-8">
-          {splitWordsAndPunctuation(article.content.split(/\r?\n/)).map((item, index) => (
-            <React.Fragment key={index}>
-              <DraggableWord
-                word={item.word}
-                disabled={!isTimerRunning}
-              />
-              <span>{item.punctuation}</span>
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="grid grid-cols-5 gap-4 mb-8">
-          {droppedWords.map((word, index) => (
-            <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
-              {word}
-            </DropBox>
-          ))}
+      <Card className="max-w-full mx-auto p-6 flex flex-col md:flex-row">
+        <div className="flex-1"> {/* Take full width on small screens, flex on medium and larger */}
+          <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
+          <p className="text-lg mb-6">{article.instruction}</p>
+          <div className="mb-6 flex items-center">
+            <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
+              {isTimerRunning ? "Stop" : "Start"}
+            </Button>
+            <span className="ml-4 text-xl">Timer: {timer}s</span>
+          </div>
+          <div className="mb-8 flex"> {/* Flex container for article content and progress bar */}
+            <div className="flex-1 h-full flex"> {/* Article content area */}
+              <div className="flex-1 overflow-y-auto"> {/* Allow scrolling if the content overflows */}
+                {splitWordsAndPunctuation(article.content.split(/\r?\n/)).map((item, index) => (
+                  <React.Fragment key={index}>
+                    <DraggableWord
+                      word={item.word}
+                      disabled={!isTimerRunning}
+                    />
+                    <span>{item.punctuation}</span>
+                  </React.Fragment>
+                ))}
+              </div>
+              <div className="w-1/4 ml-6 flex justify-center items-center"> {/* Fixed width for ProgressBar */}
+                <ProgressBar progress={progress} modelDone={modelDone} />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-5 gap-4 mb-8">
+            {droppedWords.map((word, index) => (
+              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
+                {word}
+              </DropBox>
+            ))}
+          </div>
         </div>
       </Card>
       {showResults && (
