@@ -7,7 +7,7 @@ const ModelInfo = () => {
       <h1 className="text-3xl font-bold mb-4">Event Extractor Model</h1>
       <p className="mb-4">
         The Event Extractor model, developed by <a href="https://mediafutures.no/2021/10/18/huiling-you/" target="_blank" style={{ color: 'blue' }}>Huiling You</a>, is a natural language processing model designed to quickly and accurately identify key events and important information
-        from text. It can process articles and extract relevant information in under a second,
+        from text. It can fastly process articles and extract relevant information,
         significantly reducing the time needed for manual analysis.
       </p>
       <p className="mb-4">

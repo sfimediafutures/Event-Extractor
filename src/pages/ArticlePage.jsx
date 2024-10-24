@@ -44,7 +44,7 @@ const fetchArticle = async (topicId) => {
   return {
     title: article.title,
     content: combinedText,
-    instruction: "Oppgave: Finn og dra passende ord eller uttrykk i teksten til riktig boks."
+    instruction: "Finn og dra passende ord eller uttrykk i teksten til riktig boks."
   };
 };
 
@@ -151,7 +151,7 @@ const ArticlePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <Card className="max-w-full mx-auto p-6">
+      <Card className="max-w-full mx-auto p-6 select-none">
         <h1 className="flex justify-center text-3xl font-bold mb-4">{article.title}</h1>
         <div className="flex mb-6"> {/* Flex container for boxes and article text */}
           <div className="flex-none flex flex-col justify-top gap-4 min-w-36"> {/* Box container */}
