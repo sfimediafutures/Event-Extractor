@@ -148,18 +148,26 @@ const ArticlePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <Card className="max-w-full mx-auto p-6 flex flex-col md:flex-row">
-        <div className="flex-1"> {/* Take full width on small screens, flex on medium and larger */}
-          <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
-          <p className="text-lg mb-6">{article.instruction}</p>
-          <div className="mb-6 flex items-center">
-            <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
-              {isTimerRunning ? "Stop" : "Start"}
-            </Button>
-            <span className="ml-4 text-xl">Timer: {timer}s</span>
+      <Card className="max-w-full mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
+        <p className="text-lg mb-6">{article.instruction}</p>
+        <div className="mb-6 flex items-center">
+          <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
+            {isTimerRunning ? "Stop" : "Start"}
+          </Button>
+          <span className="ml-4 text-xl">Timer: {timer}s</span>
+        </div>
+        <div className="flex mb-6"> {/* Flex container for boxes and article text */}
+          <div className="flex-none flex flex-col justify-center gap-4 mr-6"> {/* Box container */}
+            {droppedWords.map((word, index) => (
+              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
+                {word}
+              </DropBox>
+            ))}
           </div>
-          <div className="mb-8 flex"> {/* Flex container for article content and progress bar */}
-            <div className="flex-1 h-full flex"> {/* Article content area */}
+          <div className="border-l border-gray-300 mx-4"></div>
+          <div className="flex-1"> {/* Article content area */}
+            <div className="flex"> {/* Flex container for article content and progress bar */}
               <div className="flex-1 overflow-y-auto"> {/* Allow scrolling if the content overflows */}
                 {splitWordsAndPunctuation(article.content.split(/\r?\n/)).map((item, index) => (
                   <React.Fragment key={index}>
@@ -171,17 +179,10 @@ const ArticlePage = () => {
                   </React.Fragment>
                 ))}
               </div>
-              <div className="w-1/4 ml-6 flex justify-center items-center"> {/* Fixed width for ProgressBar */}
+              <div className="w-10 ml-6 flex justify-center items-center"> {/* Fixed width for ProgressBar */}
                 <ProgressBar progress={progress} modelDone={modelDone} />
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-5 gap-4 mb-8">
-            {droppedWords.map((word, index) => (
-              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
-                {word}
-              </DropBox>
-            ))}
           </div>
         </div>
       </Card>
@@ -198,3 +199,4 @@ const ArticlePage = () => {
 };
 
 export default ArticlePage;
+
