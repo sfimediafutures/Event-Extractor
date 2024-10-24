@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import DropBox from "@/components/DropBox";
 import ResultsWindow from "@/components/ResultsWindow";
+import Overlay from "@/components/StartOverlay"; // Import the Overlay component
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DraggableWord from '@/components/DraggableWord';
 import ProgressBar from '@/components/ProgressBar';
@@ -43,7 +44,7 @@ const fetchArticle = async (topicId) => {
   return {
     title: article.title,
     content: combinedText,
-    instruction: "Identify the 5 most important words in this article and drag them to the boxes below."
+    instruction: "Oppgave: Finn og dra passende ord eller uttrykk i teksten til riktig boks."
   };
 };
 
@@ -73,6 +74,7 @@ const ArticlePage = () => {
   const [showResults, setShowResults] = useState(false);
   const [progress, setProgress] = useState(0);
   const [modelDone, setModelDone] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true); // State for overlay visibility
   const queryClient = useQueryClient();
 
   const { data: times = [] } = useQuery({
@@ -128,6 +130,7 @@ const ArticlePage = () => {
       setDroppedWords(Array(5).fill(null));
       setProgress(0);
       setModelDone(false);
+      setShowOverlay(false); // Close the overlay when starting
     }
   };
 
@@ -149,21 +152,12 @@ const ArticlePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <Card className="max-w-full mx-auto p-6">
-        <p className="flex justify-center text-lg mb-6">{article.instruction}</p>
         <h1 className="flex justify-center text-3xl font-bold mb-4">{article.title}</h1>
         <div className="flex mb-6"> {/* Flex container for boxes and article text */}
-          <div className="flex-none flex flex-col justify-top gap-4 mr-6 min-w-36"> {/* Box container */}
-            <div className="mb-6 flex flex-col gap-4 justify-center items-center">
-              <span className="ml-4 text-xl">
-                Timer: {timer}s
-              </span>
-              <Button onClick={handleStartStop} disabled={isTimerRunning && !allBoxesFilled}>
-              {isTimerRunning ? "Stop" : "Start"}
-              </Button>
-            </div>
-            {droppedWords.map((word, index) => (
+          <div className="flex-none flex flex-col justify-top gap-4 min-w-36"> {/* Box container */}
+            {["Who", "When", "What", "Why", "How"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
-                {word}
+                {droppedWords[index] || label} {/* Show dropped word or label */}
               </DropBox>
             ))}
           </div>
@@ -187,6 +181,12 @@ const ArticlePage = () => {
             </div>
           </div>
         </div>
+        <div className="flex justify-between mt-4"> {/* Timer and Stop button area */}
+          <div className="text-lg font-semibold">Time: {timer}s</div>
+          <Button onClick={handleStartStop} className="bg-blue-500 text-white">
+            {isTimerRunning ? "Stop" : "Start"}
+          </Button>
+        </div>
       </Card>
       {showResults && (
         <ResultsWindow
@@ -196,9 +196,15 @@ const ArticlePage = () => {
           currentArticleTitle={article.title}
         />
       )}
+      {showOverlay && ( // Render Overlay if showOverlay is true
+        <Overlay
+          instruction={article.instruction}
+          onStart={handleStartStop}
+          onClose={() => setShowOverlay(false)}
+        />
+      )}
     </div>
   );
 };
 
 export default ArticlePage;
-
