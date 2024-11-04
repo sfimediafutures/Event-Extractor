@@ -154,14 +154,20 @@ const ArticlePage = () => {
       <Card className="max-w-full mx-auto p-6 select-none">
         <h1 className="flex justify-center text-3xl font-bold mb-4">{article.title}</h1>
         <div className="flex mb-6"> {/* Flex container for boxes and article text */}
-          <div className="flex-none flex flex-col justify-top gap-4 min-w-36"> {/* Box container */}
-            {["Who", "Where", "When", "What", "Why"].map((label, index) => (
-              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
-                {droppedWords[index] || label} {/* Show dropped word or label */}
-              </DropBox>
-            ))}
+          <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/5 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8"> {/* Box container */}
+            <div className="flex justify-between items-center mt-4"> {/* Timer and Stop button area */}
+              <div className="text-lg font-semibold">Time: {timer}s</div>
+              <Button onClick={handleStartStop} className="bg-slate-500 text-slate-100">
+                {isTimerRunning ? "Ferdig" : "Start"}
+              </Button>
+            </div>
+            <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
+              {["Who", "Where", "When", "What", "Why"].map((label, index) => (
+                <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
+                  {droppedWords[index] || label} {/* Show dropped word or label */}
+                </DropBox>
+              ))}
           </div>
-          <div className="border-l border-gray-300 mx-4"></div>
           <div className="flex-1"> {/* Article content area */}
             <div className="flex"> {/* Flex container for article content and progress bar */}
               <div className="flex-1 overflow-y-auto"> {/* Allow scrolling if the content overflows */}
@@ -180,12 +186,6 @@ const ArticlePage = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex justify-between mt-4"> {/* Timer and Stop button area */}
-          <div className="text-lg font-semibold">Time: {timer}s</div>
-          <Button onClick={handleStartStop} className="bg-blue-500 text-white">
-            {isTimerRunning ? "Stop" : "Start"}
-          </Button>
         </div>
       </Card>
       {showResults && (

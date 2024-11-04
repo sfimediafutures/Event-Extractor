@@ -1,0 +1,136 @@
+{
+ "doc_id": "TV2-11462712",
+ "title": "Politiet med båtjakt etter knivepisode",
+ "body_text": "<p>Da TV 2 ringte til politiet tidligere fredag kveld, så fortalte operasjonsleder i Oslo-politiet, Guro Sandnes, at politiet hadde fått en melding om et masseslagsmål 20.48, og at de allerede 21.15 hadde funnet flere av ungdommene som skulle ha vært involvert i slagsmålet.</p><p>– De som meldte fra, ser ingen som er skadd. Etter hvert får vi melding om at de ser «stikklignende gjenstander», som kniv. Vi har også fått beskrivelser på det vi tror kan være machete. Slike ting blir brukt i visse miljøer, sa operasjonsleder Guro Sandnes i Oslo-politiet til TV 2 tidligere fredag kveld.</p><p>Sandnes opplyste også om at politiet tok i bruk politibåt og en hundepatrulje for å lete etter ungdommene.</p><p><span class=\" bold\" data-lab-bold_desktop=\"bold\">Da TV 2 ringer politiet senere på kvelden forteller Sandnes derimot at det ikke nødvendigvis var snakk om et masseslagsmål.</span></p><p>– Det som ble meldt som å være et masseslagsmål, ser vi nå på som en samling av ungdommer på samme sted, hvor en eller flere har vært i konflikt med hverandre, sier Sandnes.</p><p>Hun forteller likevel at en av ungdommene skal ha vært bevæpnet.</p><p>– Ut i fra det materialet vi besitter så har en person båret en stor kniv eller machete, og gjort et utfall mot en eller flere personer. Hvem eller hvor mange han ønsket å ramme, det vet vi ikke.</p><p>Sandnes sier videre at et tosifret antall ungdommer var samlet mens hendelsen pågikk, men at ingen ble pågrepet.</p>",
+ "publish_date": "2020-05-22",
+ "events": [
+  {
+   "event_type": "RINGE_SKRIVE",
+   "trigger": "ringte",
+   "arguments": [
+    [
+     "entitet",
+     "TV 2"
+    ],
+    [
+     "entitet",
+     "operasjonsleder i Oslo-politiet, Guro Sandnes"
+    ],
+    [
+     "tid",
+     "tidligere fredag kveld"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "slagsmål",
+   "arguments": [
+    [
+     "angriper",
+     "ungdommene som skulle ha vært involvert i slagsmålet"
+    ]
+   ]
+  },
+  {
+   "event_type": "SKADE",
+   "trigger": "skadd",
+   "arguments": [
+    [
+     "offer",
+     "ingen som er skadd"
+    ]
+   ]
+  },
+  {
+   "event_type": "RINGE_SKRIVE",
+   "trigger": "ringer",
+   "arguments": [
+    [
+     "entitet",
+     "TV 2"
+    ],
+    [
+     "entitet",
+     "politiet"
+    ],
+    [
+     "tid",
+     "senere på kvelden"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "masseslagsmål",
+   "arguments": []
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "masseslagsmål",
+   "arguments": []
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "samling",
+   "arguments": [
+    [
+     "entitet",
+     "ungdommer"
+    ],
+    [
+     "sted",
+     "samme sted"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "utfall",
+   "arguments": [
+    [
+     "mål",
+     "en eller flere personer"
+    ],
+    [
+     "angriper",
+     "en person"
+    ]
+   ]
+  },
+  {
+   "event_type": "SKADE",
+   "trigger": "ramme",
+   "arguments": [
+    [
+     "initiativtaker",
+     "han"
+    ],
+    [
+     "offer",
+     "Hvor eller hvor mange han ønsket å ramme"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "samlet",
+   "arguments": [
+    [
+     "entitet",
+     "et tosifret antall ungdommer"
+    ]
+   ]
+  },
+  {
+   "event_type": "ARRESTERE",
+   "trigger": "pågrepet",
+   "arguments": [
+    [
+     "person",
+     "ingen"
+    ]
+   ]
+  }
+ ]
+}

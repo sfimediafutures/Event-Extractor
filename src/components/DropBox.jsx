@@ -15,7 +15,7 @@ const DropBox = ({ index, children, onDrop }) => {
     <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      className="border-2 border-solid border-gray-300 rounded p-4 h-24 flex items-center justify-center text-center"
+      className="border-2 border-solid border-slate-100 bg-slate-100 rounded-lg p-4 h-24 flex items-center justify-center text-center"
     >
       {children || <span className="text-gray-500">Box {index}</span>}
     </div>

@@ -1,0 +1,188 @@
+{
+ "doc_id": "TV2-11471800",
+ "title": "Elbilen er forsinket - nå må flere tusen nordmenn vente",
+ "body_text": "<p>Etter planen skulle den vært på plass i Norge om ganske kort tid, Polestars første elbil som kort og godt heter Polestar 2.</p><p>Som vanlig når det gjelder elbiler, har interessen for bilen vært stor her hjemme. Polestar har ikke gått ut med noen offisielle salgstall, men det er ventet at flere tusen kunder har reservert bilen.</p><p>Polestar 2 er søstermodellen til Volvo XC40, i elektrisk utgave, men i en litt mer sporty variant.</p><p>Nå som Polestar for alvor skal i gang som frittstående merke, har de fått en relativt krevende start. Korona-situasjonen har gjort våren spesiell. Også for de som lager biler.</p><h2>Kommer ikke før i august. </h2><p>En rekke fabrikker har måttet stenge, det er også svært utfordrende tider hos både importører og forhandlere.</p><p>Polestar har likevel klart å starte produksjonen ved sin fabrikk i Luqiao i Kina. De første bilene har trillet av samlebåndet tidligere i vår. Optimismen var tilbake hos både importør og ventende Polestar-kunder. <a href=\"https://www.tv2.no/a/11448140/\">For bare et par uker siden bekreftet Polestar at ting gikk på skinner</a> og at de første kundene skulle få bil i sommer.</p><p>Men så kom kontrabeskjeden som både kunder og importør fryktet. Bilene blir forsinket.Det som skulle vært juni/juli har nå blitt til august / september.</p><p><span class=\" bold\" data-lab-bold_desktop=\"bold\">Polestar:</span> <a href=\"https://www.tv2.no/a/10890641/\">Ingen får kjøpe den billigere enn oss nordmenn</a></p><h2>De første kundene hardest rammet</h2><p>– De første bilene har allerede forlatt fabrikken og er nå på vei til Norge. Du kan være trygg på at vi tar alle nødvendige forhåndsregler på grunn av situasjonen vi befinner oss i, der vi sammen med våre partnere gjør vårt ytterste for å levere din Polestar 2 til deg så snart som mulig med minimale forsinkelser på veien, skriver Polestar nå til sine ventende kunder.</p><p>De legger til:</p><p>– Det er dessverre dere som ligger først i køen som blir hardest rammet av dette, men det er fremdeles dere som får bil først, selv om det tar lengre tid.</p><p><a href=\"https://www.tv2.no/broom/10088879/\">Solgte som varmt hvetebrød – så var det bråstopp</a></p><h2>Transport-problemer</h2><p>– Vi har stor respekt for at mange har ventet lenge og gleder seg veldig til å hente sin nye Polestar 2, og vi gleder oss veldig til å endelig se Polestar 2 på veien! Vi kan ikke gjøre annet enn å beklage at leveringen blir noe utsatt og de problemene dette medfører for enkelte. Det sier Alexander Hørthe som er daglig leder for Polestar i Norge.</p><p>– Samtidig har vi fått mange tilbakemeldinger med forståelse for situasjonen vi befinner oss i og det er vi takknemlige for. Produksjonen av Polestar 2 går som planlagt, men grunnet situasjonen verden befinner seg i, opplever vi dessverre noen komplikasjoner med transport fra fabrikken og til lokale markeder, sier han.</p><p>– Skip har blitt omdirigert til nye havner og det har vært utfordringer i mellomstasjoner underveis, grunnet lokale restriksjoner. Tidligere estimater har derfor blitt endret i siste liten hos transportleverandører, noe som medfører noen uker forsinkelse for de første som skulle fått sin Polestar 2 i sommer, forklarer Hørthe.</p><h2>Ikke alene</h2><p>Etter det Broom erfarer, kommer det en håndfull biler til Norge i løpet av juli, men disse vil være demobiler for prøvekjøring etc. og altså ikke kundebiler.</p><p>Polestar 2 har for øvrig en offisiell rekkevidde på opptil 470 kilometer. Med det plasserer den seg mot toppen av denne klassen.</p><p>Batteripakken er på 78 kWt. Bilen har to elmotorer og firehjulstrekk. 408 hestekrefter skal gi 0-100 km/t på under 5 sekunder.</p><p>Foruten i Oslo, hvor et anlegg allerede har åpnet, skal Polestar også etablere seg i Stavanger, Bergen og Trondheim. De skal utnytte utvalgte Volvo-verksteder i Norge for å tilby service og reparasjoner.</p><p>Men aller først må bilene komme. Det er selvfølgelig en fattig trøst, men Polestar er ikke alene om å ha havnet i denne litt kinkige situasjonen. Tidligere denne uken kunne vi melde at Fords elektriske Mach-E også er forsinket. <a href=\"https://www.tv2.no/broom/11466571/\">Les mer om det her:</a></p><p><span class=\" bold\" data-lab-bold_desktop=\"bold\">Slår alarm:<a href=\"https://www.tv2.no/broom/11468259/\"> </a></span><a href=\"https://www.tv2.no/broom/11468259/\">Tror salget av elbiler vil bli strupet</a></p><p><span class=\" bold\" data-lab-bold_desktop=\"bold\">Video: Dette er tidenes raskeste Volvoer</span></p>",
+ "publish_date": "2020-05-28",
+ "events": [
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "salgstall",
+   "arguments": [
+    [
+     "ting",
+     "bilen"
+    ]
+   ]
+  },
+  {
+   "event_type": "AVSLUTTE_ORG",
+   "trigger": "stenge",
+   "arguments": [
+    [
+     "org",
+     "En rekke fabrikker"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "få",
+   "arguments": [
+    [
+     "ting",
+     "bil"
+    ],
+    [
+     "tid",
+     "sommer"
+    ],
+    [
+     "kjøper",
+     "de første kundene"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "kjøpe",
+   "arguments": [
+    [
+     "ting",
+     "den"
+    ],
+    [
+     "kjøper",
+     "Ingen"
+    ],
+    [
+     "kjøper",
+     "oss nordmenn"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "på vei",
+   "arguments": [
+    [
+     "destinasjon",
+     "Norge"
+    ],
+    [
+     "ting",
+     "De første bilene"
+    ],
+    [
+     "opphavssted",
+     "fabrikken"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "levere",
+   "arguments": [
+    [
+     "ting",
+     "din Polestar 2"
+    ],
+    [
+     "kjøper",
+     "deg"
+    ],
+    [
+     "selger",
+     "vi"
+    ],
+    [
+     "tid",
+     "så snart som mulig"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "får",
+   "arguments": [
+    [
+     "ting",
+     "bil"
+    ],
+    [
+     "kjøper",
+     "dere"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "omdirigert",
+   "arguments": [
+    [
+     "ting",
+     "Skip"
+    ],
+    [
+     "destinasjon",
+     "nye havner"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "kommer",
+   "arguments": [
+    [
+     "ting",
+     "en håndfull biler"
+    ],
+    [
+     "destinasjon",
+     "Norge"
+    ],
+    [
+     "tid",
+     "juli"
+    ]
+   ]
+  },
+  {
+   "event_type": "BEGYNNE_ORG",
+   "trigger": "åpnet",
+   "arguments": [
+    [
+     "org",
+     "et anlegg"
+    ],
+    [
+     "sted",
+     "Oslo"
+    ]
+   ]
+  },
+  {
+   "event_type": "BEGYNNE_ORG",
+   "trigger": "etablere",
+   "arguments": [
+    [
+     "org",
+     "Polestar"
+    ],
+    [
+     "sted",
+     "Stavanger, Bergen og Trondheim"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "salget",
+   "arguments": [
+    [
+     "ting",
+     "elbiler"
+    ]
+   ]
+  }
+ ]
+}
