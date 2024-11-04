@@ -10,23 +10,27 @@ import DraggableWord from '@/components/DraggableWord';
 import ProgressBar from '@/components/ProgressBar';
 
 // Import the example documents
-import doc1 from "@/example_docs/example_doc1.json";
-import doc2 from "@/example_docs/example_doc2.json";
-import doc3 from "@/example_docs/example_doc3.json";
-import doc4 from "@/example_docs/example_doc4.json";
-import doc5 from "@/example_docs/example_doc5.json";
+import doc1 from "@/example_docs/doc_1.json";
+import doc2 from "@/example_docs/doc_2.json";
+import doc3 from "@/example_docs/doc_3.json";
+import doc4 from "@/example_docs/doc_5.json";
+import doc5 from "@/example_docs/doc_6.json";
 
 const articleData = [
-  { doc: doc1, title: "Er vi redde for moral?" },
-  { doc: doc2, title: "Placeholder" },
-  { doc: doc3, title: "Heavyrockens Elvis Presley" },
-  { doc: doc4, title: "Innbytterne avgjorde for AaFK!" },
-  { doc: doc5, title: "Placeholder nr2" }
+  { doc: doc1, title: "Satt 37 år i fengsel for en voldtekt han aldri begikk – nå er han storfavoritt i talentprogram" },
+  { doc: doc2, title: "Fotballfrue pågrepet med våpen på flyplass" },
+  { doc: doc3, title: "Elbilen er forsinket - nå må flere tusen nordmenn vente" },
+  { doc: doc4, title: "Mann (72) knivdrept i videomøte" },
+  { doc: doc5, title: "Politiet med båtjakt etter knivepisode" }
 ];
 
-const splitWordsAndPunctuation = (textArray) => {
+const splitWordsAndPunctuation = (htmlString) => {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = htmlString;
+  const textContent = tempDiv.innerText;
   const regex = /(\S+)([.,!?;:"""«»\s]*)/g;
   let result = [];
+  let match;
   textArray.forEach((item) => {
     let match;
     while ((match = regex.exec(item)) !== null) {
@@ -38,7 +42,7 @@ const splitWordsAndPunctuation = (textArray) => {
 
 const fetchArticle = async (topicId) => {
   const article = articleData[topicId - 1]; // Adjusting for 0-based indexing
-  const textArray = article.doc.doc_text;
+  const textArray = article.doc.body_text;
   const combinedText = textArray.join("");
 
   return {
