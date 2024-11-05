@@ -182,7 +182,7 @@ const ArticlePage = () => {
               </Button>
             </div>
             <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
-              {["Hvem?", "Hvor?", "Når?", "Hva?", "Hvorfor?"].map((label, index) => (
+              {["Hvem?", "Hvor?", "Når?", "Hva?"].map((label, index) => (
                 <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                   {droppedWords[index] || label} {/* Show dropped word or label */}
                 </DropBox>
