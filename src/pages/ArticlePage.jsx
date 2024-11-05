@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import DropBox from "@/components/DropBox";
 import ResultsWindow from "@/components/ResultsWindow";
-import Overlay from "@/components/StartOverlay"; // Import the Overlay component
+import Overlay from "@/components/StartOverlay";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DraggableWord from '@/components/DraggableWord';
 import ProgressBar from '@/components/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
-// Import the example documents
 import doc1 from "@/example_docs/doc_1.json";
 import doc2 from "@/example_docs/doc_2.json";
 import doc3 from "@/example_docs/doc_3.json";
@@ -87,14 +86,14 @@ const saveTime = ({ time, name, articleTitle }) => {
 
 const ArticlePage = () => {
   const { topicId } = useParams();
-  const [article, setArticle] = useState({ title: '', content: '', instruction: '', events: '' });
+  const [article, setArticle] = useState({ title: '', content: '', instruction: '', events: [] });
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [droppedWords, setDroppedWords] = useState(Array(5).fill(null));
   const [showResults, setShowResults] = useState(false);
   const [progress, setProgress] = useState(0);
   const [modelDone, setModelDone] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true); // State for overlay visibility
+  const [showOverlay, setShowOverlay] = useState(true);
   const queryClient = useQueryClient();
 
   const { data: times = [] } = useQuery({
@@ -135,7 +134,7 @@ const ArticlePage = () => {
           }
           return prevProgress + 1;
         });
-      }, 30); // 4000ms / 100 = 40ms per 1% increase
+      }, 30);
     }
     return () => clearInterval(progressInterval);
   }, [isTimerRunning, progress]);
@@ -150,7 +149,7 @@ const ArticlePage = () => {
       setDroppedWords(Array(5).fill(null));
       setProgress(0);
       setModelDone(false);
-      setShowOverlay(false); // Close the overlay when starting
+      setShowOverlay(false);
     }
   };
 
@@ -178,7 +177,7 @@ const ArticlePage = () => {
             <div className="flex justify-between items-center mt-4"> {/* Timer and Stop button area */}
               <div className="text-lg font-semibold">Time: {timer}s</div>
               <Button onClick={handleStartStop} className="bg-slate-500 text-slate-100">
-                {isTimerRunning ? "Ferdig" : "Start"}
+                {/* {isTimerRunning ? "Ferdig" : "Start"} */}Ferdig
               </Button>
             </div>
             <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
@@ -221,6 +220,24 @@ const ArticlePage = () => {
                   </div>
                 </div>
                 <FontAwesomeIcon icon={faArrowDown}/>
+                <div>
+                  <h2 className="font-bold mb-2">Event List:</h2>
+                  <ul className="list-disc pl-5">
+                    {article.events && article.events.map((event, index) => (
+                      <li key={index} className="mb-4">
+                        <p><strong>Event Type:</strong> {event.event_type}</p>
+                        <p><strong>Trigger:</strong> {event.trigger}</p>
+                        <ul className="pl-4">
+                          {event.arguments.map((arg, argIndex) => (
+                            <li key={argIndex}>
+                              <strong>{arg[0]}:</strong> {arg[1]}
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <div>
                   
                 </div>
