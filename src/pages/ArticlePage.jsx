@@ -25,29 +25,43 @@ const articleData = [
 ];
 
 const splitWordsAndPunctuation = (htmlString) => {
+  // Create a temporary div to parse HTML
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = htmlString;
-  const textContent = tempDiv.innerText;
-  const regex = /(\S+)([.,!?;:"""«»\s]*)/g;
+  
+  // Get text content while preserving spaces and line breaks
+  const paragraphs = tempDiv.getElementsByTagName('p');
+  // const regex = /(\S+)([.,!?;:"""«»]*)(\s*)/g;
   let result = [];
-  let match;
-  textArray.forEach((item) => {
+  Array.from(paragraphs).forEach((p, pIndex) => {
+    const text = p.textContent || p.innerText;
+    const regex = /(\S+)([.,!?;:"""«»]*)(\s*)/g;
     let match;
-    while ((match = regex.exec(item)) !== null) {
-      result.push({ word: match[1], punctuation: match[2].trimStart() + ' ' });
+    
+    while ((match = regex.exec(text)) !== null) {
+      result.push({
+        word: match[1],
+        punctuation: match[2],
+        space: match[3]
+      });
+    }
+    
+    // Add a line break after each paragraph except the last one
+    if (pIndex < paragraphs.length - 1) {
+      result.push({ word: '', punctuation: '', space: '\n\n' });
     }
   });
+  
   return result;
 };
 
 const fetchArticle = async (topicId) => {
-  const article = articleData[topicId - 1]; // Adjusting for 0-based indexing
-  const textArray = article.doc.body_text;
-  const combinedText = textArray.join("");
-
+  const selectedArticle = articleData[parseInt(topicId) - 1];
+  if (!selectedArticle) return null;
+  
   return {
-    title: article.title,
-    content: combinedText,
+    title: selectedArticle.title,
+    content: selectedArticle.doc.body_text,
     instruction: "Finn og dra passende ord eller uttrykk fra teksten til riktig boks."
   };
 };
@@ -174,15 +188,20 @@ const ArticlePage = () => {
           </div>
           <div className="flex-1"> {/* Article content area */}
             <div className="flex"> {/* Flex container for article content and progress bar */}
-              <div className="flex-1 overflow-y-auto"> {/* Allow scrolling if the content overflows */}
-                {splitWordsAndPunctuation(article.content.split(/\r?\n/)).map((item, index) => (
-                  <React.Fragment key={index}>
-                    <DraggableWord
-                      word={item.word}
-                      disabled={!isTimerRunning}
-                    />
-                    <span>{item.punctuation}</span>
-                  </React.Fragment>
+            <div className="flex-1 overflow-y-auto whitespace-pre-wrap">
+                {article.content && article.content.split('\n').map((paragraph, pIndex) => (
+                  <p key={pIndex} className="mb-4">
+                    {splitWordsAndPunctuation(`<p>${paragraph}</p>`).map((item, index) => (
+                      <React.Fragment key={index}>
+                        <DraggableWord
+                          word={item.word}
+                          disabled={!isTimerRunning}
+                        />
+                        <span>{item.punctuation}</span>
+                        <span>{item.space}</span>
+                      </React.Fragment>
+                    ))}
+                  </p>
                 ))}
               </div>
               <div className="w-10 ml-6 flex justify-center items-center"> {/* Fixed width for ProgressBar */}

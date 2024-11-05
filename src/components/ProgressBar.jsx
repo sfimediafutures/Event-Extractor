@@ -2,6 +2,13 @@ import React from 'react';
 import { Progress } from "@/components/ui/progress";
 import { motion, AnimatePresence } from "framer-motion";
 
+const steps = [
+  { percentage: 0, text: 'Step 1: Pre-processing the text' },
+  { percentage: 25, text: 'Step 2: Loading the model' },
+  { percentage: 50, text: 'Step 3: Extracting events from the text... X events found' },
+  { percentage: 100, text: 'Step 4: Finish extraction and saving the outputs' }
+];
+
 const ProgressBar = ({ progress, modelDone }) => (
   <div className="flex flex-col items-center h-full">
     <div className="relative w-8 h-full bg-gray-200 rounded">
