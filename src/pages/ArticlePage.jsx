@@ -8,6 +8,8 @@ import Overlay from "@/components/StartOverlay"; // Import the Overlay component
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DraggableWord from '@/components/DraggableWord';
 import ProgressBar from '@/components/ProgressBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 // Import the example documents
 import doc1 from "@/example_docs/doc_1.json";
@@ -168,9 +170,9 @@ const ArticlePage = () => {
   const allBoxesFilled = droppedWords.every((word) => word !== null);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-6">
       <Card className="max-w-full mx-auto p-6 select-none">
-        <h1 className="flex justify-center text-3xl font-bold mb-4">{article.title}</h1>
+        <h1 className="flex justify-center text-3xl font-bold mb-8">{article.title}</h1>
         <div className="flex mb-6"> {/* Flex container for boxes and article text */}
           <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/5 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8"> {/* Box container */}
             <div className="flex justify-between items-center mt-4"> {/* Timer and Stop button area */}
@@ -180,7 +182,7 @@ const ArticlePage = () => {
               </Button>
             </div>
             <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
-              {["Who", "Where", "When", "What", "Why"].map((label, index) => (
+              {["Hvem?", "Hvor?", "Når?", "Hva?", "Hvorfor?"].map((label, index) => (
                 <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                   {droppedWords[index] || label} {/* Show dropped word or label */}
                 </DropBox>
@@ -188,7 +190,7 @@ const ArticlePage = () => {
           </div>
           <div className="flex-1"> {/* Article content area */}
             <div className="flex"> {/* Flex container for article content and progress bar */}
-              <div className="flex-1 overflow-y-auto whitespace-pre-wrap">
+              <div className="flex-1 whitespace-pre-wrap mt-">
                 {article.content && article.content.split('\n').map((paragraph, pIndex) => (
                   <p key={pIndex} className="mb-4">
                     {splitWordsAndPunctuation(`<p>${paragraph}</p>`).map((item, index) => (
@@ -204,13 +206,23 @@ const ArticlePage = () => {
                   </p>
                 ))}
               </div>
-              <div className="w-1/4 h-96 ml-6 flex flex-row justify-items-start items-start gap-4"> {/* Fixed width for ProgressBar */}
-                <ProgressBar progress={progress} modelDone={modelDone} />
-                <div className="flex flex-col h-96 justify-between">
-                  <div className="text-md"><b>Step 4:</b><br/> Finish extraction and saving the output</div>
-                  <div className="text-md"><b>Step 3:</b><br/> Extracting events from the text</div>
-                  <div className="text-md"><b>Step 2:</b><br/> Loading the model</div>
-                  <div className="text-md"><b>Step 1:</b><br/> Pre-processing the text</div>
+              <div className="border-l border-gray-300 ml-4"></div>
+              <div className="flex flex-col w-1/4 gap-4 pl-4">
+                <div className="text-lg font-bold pt-2">
+                  Automatic event extraction:
+                </div>
+                <div className="h-fit px-4 py-6 flex flex-row justify-items-start items-start gap-4 rounded-lg bg-slate-100"> {/* Fixed width for ProgressBar */}
+                  <ProgressBar progress={progress} modelDone={modelDone} />
+                  <div className="flex flex-col h-96 justify-between pt-2">
+                    <div className="text-md"><b>Step 4:</b><br/> Finish extraction and saving the output</div>
+                    <div className="text-md"><b>Step 3:</b><br/> Extracting events from the text</div>
+                    <div className="text-md"><b>Step 2:</b><br/> Loading the model</div>
+                    <div className="text-md"><b>Step 1:</b><br/> Pre-processing the text</div>
+                  </div>
+                </div>
+                <FontAwesomeIcon icon={faArrowDown}/>
+                <div>
+                  
                 </div>
               </div>
             </div>
