@@ -33,7 +33,6 @@ const splitWordsAndPunctuation = (htmlString) => {
   
   // Get text content while preserving spaces and line breaks
   const paragraphs = tempDiv.getElementsByTagName('p');
-  // const regex = /(\S+)([.,!?;:"""«»]*)(\s*)/g;
   let result = [];
   Array.from(paragraphs).forEach((p, pIndex) => {
     const text = p.textContent || p.innerText;
@@ -64,7 +63,8 @@ const fetchArticle = async (topicId) => {
   return {
     title: selectedArticle.title,
     content: selectedArticle.doc.body_text,
-    instruction: "Finn og dra passende ord eller uttrykk fra teksten til riktig boks."
+    instruction: "Finn og dra passende ord eller uttrykk fra teksten til riktig boks.",
+    events: selectedArticle.doc.events
   };
 };
 
@@ -87,7 +87,7 @@ const saveTime = ({ time, name, articleTitle }) => {
 
 const ArticlePage = () => {
   const { topicId } = useParams();
-  const [article, setArticle] = useState({ title: '', content: '', instruction: '' });
+  const [article, setArticle] = useState({ title: '', content: '', instruction: '', events: '' });
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [droppedWords, setDroppedWords] = useState(Array(5).fill(null));
@@ -135,7 +135,7 @@ const ArticlePage = () => {
           }
           return prevProgress + 1;
         });
-      }, 40); // 4000ms / 100 = 40ms per 1% increase
+      }, 30); // 4000ms / 100 = 40ms per 1% increase
     }
     return () => clearInterval(progressInterval);
   }, [isTimerRunning, progress]);

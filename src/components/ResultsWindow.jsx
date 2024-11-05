@@ -58,11 +58,11 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <Card className="p-6 max-w-md w-full">
+      <Card className="p-6 max-w-lg w-full">
         {!showModelInfo ? (
           <>
-            <h2 className="text-2xl font-bold mb-4">Your Results</h2>
-            <p className="mb-4">Your time: {time} seconds</p>
+            <h2 className="text-2xl font-bold mb-4">Results</h2>
+            <p className="mb-4 text-lg">Your time: {time} seconds</p>
             <h3 className="text-xl font-semibold mb-2">Highscores</h3>
             <ol className="list-none pl-0 mb-4">
               {topTimes.map((t, index) => renderTimeEntry(t, index))}
@@ -72,16 +72,10 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
                 Your rank: {userRank} - {savedTime ? savedTime.name : 'You'}: {time} seconds [{currentArticleTitle}]
               </p>
             )}
-            <p className="mb-4 text-sm italic">
-              The Event Extractor model can complete this task in under a second, saving you valuable time.
-              <Button
-                variant="link"
-                className="p-0 h-auto"
-                onClick={() => setShowModelInfo(true)}
-              >
-                <InfoIcon className="w-4 h-4 ml-1" />
-              </Button>
-            </p>
+            <Button variant="link" className="mb-4 text-md italic rounded-lg bg-slate-200 px-4 py-2 text-wrap h-auto text-left flex-row gap-4" onClick={() => setShowModelInfo(true)}>
+              <InfoIcon className="w-10 h-10" />
+              The Event Extractor model can complete this task in 4 seconds, saving you valuable time.
+            </Button>
             <Input
               type="text"
               placeholder="Enter your name"
