@@ -188,7 +188,7 @@ const ArticlePage = () => {
           </div>
           <div className="flex-1"> {/* Article content area */}
             <div className="flex"> {/* Flex container for article content and progress bar */}
-            <div className="flex-1 overflow-y-auto whitespace-pre-wrap">
+              <div className="flex-1 overflow-y-auto whitespace-pre-wrap">
                 {article.content && article.content.split('\n').map((paragraph, pIndex) => (
                   <p key={pIndex} className="mb-4">
                     {splitWordsAndPunctuation(`<p>${paragraph}</p>`).map((item, index) => (
@@ -204,8 +204,14 @@ const ArticlePage = () => {
                   </p>
                 ))}
               </div>
-              <div className="w-10 ml-6 flex justify-center items-center"> {/* Fixed width for ProgressBar */}
+              <div className="w-1/4 h-96 ml-6 flex flex-row justify-items-start items-start gap-4"> {/* Fixed width for ProgressBar */}
                 <ProgressBar progress={progress} modelDone={modelDone} />
+                <div className="flex flex-col h-96 justify-between">
+                  <div className="text-md"><b>Step 4:</b><br/> Finish extraction and saving the output</div>
+                  <div className="text-md"><b>Step 3:</b><br/> Extracting events from the text</div>
+                  <div className="text-md"><b>Step 2:</b><br/> Loading the model</div>
+                  <div className="text-md"><b>Step 1:</b><br/> Pre-processing the text</div>
+                </div>
               </div>
             </div>
           </div>
