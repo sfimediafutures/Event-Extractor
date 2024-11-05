@@ -8,6 +8,7 @@ import Overlay from "@/components/StartOverlay";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DraggableWord from '@/components/DraggableWord';
 import ProgressBar from '@/components/ProgressBar';
+import { motion, AnimatePresence } from "framer-motion"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -84,6 +85,58 @@ const saveTime = ({ time, name, articleTitle }) => {
   return { success: true };
 };
 
+const EventList = ({ events, progress }) => {
+  if (!events || events.length === 0 || progress === 0) return null; // Only render if progress has started
+
+  const getVisibleEvents = () => {
+    const eventsPerStep = events.length / 100;
+    return Math.floor(progress * eventsPerStep);
+  };
+
+  const visibleEvents = events.slice(0, getVisibleEvents());
+
+  return (
+    <div>
+      <h2 className="font-bold mb-4 text-lg text-center">Detected Events:</h2>
+      <AnimatePresence>
+        {visibleEvents.flat().map((event, index) => {
+          if (!event) return null;
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-4 p-3 bg-slate-50 rounded"
+            >
+              <p className="font-semibold text-blue-600">{event.event_type}</p>
+              {event.trigger && (
+                <p className="text-sm mt-1">
+                  <span className="font-medium">Trigger:</span>{' '}
+                  {event.trigger} {/* Display full trigger */}
+                </p>
+              )}
+              {event.arguments && event.arguments.length > 0 && (
+                <div className="mt-2">
+                  <p className="font-medium text-sm">Arguments:</p>
+                  <ul className="list-disc pl-5 text-sm">
+                    {event.arguments.map((arg, argIndex) => (
+                      <li key={argIndex}>
+                        <span className="font-medium">{arg[2]}</span>{' '}
+                        {arg[0]} {/* Display full argument without colon */}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const ArticlePage = () => {
   const { topicId } = useParams();
   const [article, setArticle] = useState({ title: '', content: '', instruction: '', events: [] });
@@ -146,7 +199,7 @@ const ArticlePage = () => {
     } else if (!isTimerRunning) {
       setIsTimerRunning(true);
       setTimer(0);
-      setDroppedWords(Array(5).fill(null));
+      setDroppedWords(Array(4).fill(null));
       setProgress(0);
       setModelDone(false);
       setShowOverlay(false);
@@ -219,28 +272,14 @@ const ArticlePage = () => {
                     <div className="text-md"><b>Step 1:</b><br/> Pre-processing the text</div>
                   </div>
                 </div>
-                <FontAwesomeIcon icon={faArrowDown}/>
-                <div>
-                  <h2 className="font-bold mb-2">Event List:</h2>
-                  <ul className="list-disc pl-5">
-                    {article.events && article.events.map((event, index) => (
-                      <li key={index} className="mb-4">
-                        <p><strong>Event Type:</strong> {event.event_type}</p>
-                        <p><strong>Trigger:</strong> {event.trigger}</p>
-                        <ul className="pl-4">
-                          {event.arguments.map((arg, argIndex) => (
-                            <li key={argIndex}>
-                              <strong>{arg[0]}:</strong> {arg[1]}
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  
-                </div>
+                {progress > 70 && ( // Render arrow and title only if progress has started
+                  <>
+                    <div className="flex justify-center mt-4">
+                      <FontAwesomeIcon icon={faArrowDown} className="text-2xl text-gray-600" />
+                    </div>
+                    <EventList events={article.events} progress={progress} />
+                  </>
+                )}
               </div>
             </div>
           </div>

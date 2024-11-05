@@ -6,7 +6,7 @@ const ProgressBar = ({ progress, modelDone }) => (
   <div className="flex flex-col items-center h-full">
     <div className="relative w-8 h-full bg-gray-200 rounded">
       <motion.div
-        className="absolute bottom-0 w-full bg-slate-500 rounded"
+        className={`absolute bottom-0 w-full ${progress === 100 ? 'bg-green-700' : 'bg-slate-500'} rounded`}
         initial={{ height: 0 }}
         animate={{ height: `${progress}%` }}
         transition={{ duration: 0.5 }}
