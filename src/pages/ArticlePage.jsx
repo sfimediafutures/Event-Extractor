@@ -304,8 +304,7 @@ const ArticlePage = () => {
                             <ul className="list-disc pl-5 text-sm">
                               {event.arguments.map((arg, argIndex) => (
                                 <li key={argIndex}>
-                                  <span className="font-medium">{arg[2]}</span>{' '}
-                                  {arg[0]}
+                                  <span className="font-medium">{arg[0]}:</span> {arg[1]}
                                 </li>
                               ))}
                             </ul>
