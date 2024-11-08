@@ -26,6 +26,12 @@ const articleData = [
   { doc: doc5, title: "Politiet med båtjakt etter knivepisode" }
 ];
 
+const requiredWordsForArticles = [
+  ["9.", "desember", "1982", "blir"], // Required words for the first article
+  ["wordA", "wordB", "wordC", "wordD"], // Required words for the second article
+  // Add more arrays for other articles
+];
+
 const splitWordsAndPunctuation = (htmlString) => {
   // Create a temporary div to parse HTML
   const tempDiv = document.createElement('div');
@@ -192,11 +198,34 @@ const ArticlePage = () => {
     return () => clearInterval(progressInterval);
   }, [isTimerRunning, progress]);
 
+  // const handleStartStop = () => {
+  //   if (isTimerRunning && droppedWords.every(word => word !== null)) {
+  //     setIsTimerRunning(false);
+  //     setShowResults(true);
+  //   } else if (!isTimerRunning) {
+  //     setIsTimerRunning(true);
+  //     setTimer(0);
+  //     setDroppedWords(Array(4).fill(null));
+  //     setProgress(0);
+  //     setModelDone(false);
+  //     setShowOverlay(false);
+  //   }
+  // };
+
   const handleStartStop = () => {
-    if (isTimerRunning && droppedWords.every(word => word !== null)) {
-      setIsTimerRunning(false);
-      setShowResults(true);
-    } else if (!isTimerRunning) {
+    if (isTimerRunning) {
+      // Check if each dropped word matches the required word for the current article
+      const requiredWords = requiredWordsForArticles[parseInt(topicId) - 1] || [];
+      const allCorrect = droppedWords.every((word, index) => word === requiredWords[index]);
+  
+      if (allCorrect) {
+        setIsTimerRunning(false);
+        setShowResults(true);
+      } else {
+        alert("Sjekk om du har valgt riktig ord for alle bokser.");
+      }
+    } else {
+      // Start logic
       setIsTimerRunning(true);
       setTimer(0);
       setDroppedWords(Array(4).fill(null));
@@ -234,7 +263,7 @@ const ArticlePage = () => {
               </Button>
             </div>
             <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
-            {["Hvem?", "Hvor?", "Når?", "Hva?"].map((label, index) => (
+            {["Hvem gjorde noe?", "Hvor skjedde det?", "Når skjedde det?", "Hva skjedde?"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                 {droppedWords[index] || label}
               </DropBox>
