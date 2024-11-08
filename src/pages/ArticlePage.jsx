@@ -224,8 +224,9 @@ const ArticlePage = () => {
   return (
     <div className="flex flex-row min-h-screen bg-gray-100 p-6 px-4 gap-4">
       <Card className="w-3/4 mx-auto p-6 select-none">
+      <h1 className="flex justify-center text-3xl font-bold -mb-4">{article.title}</h1>
         <div className="flex mb-6">
-          <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/5 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8">
+          <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/4 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8 mt-12">
             <div className="flex justify-between items-center mt-4">
               <div className="text-lg font-semibold">Time: {timer}s</div>
               <Button onClick={handleStartStop} className="bg-slate-500 text-slate-100">
@@ -240,7 +241,7 @@ const ArticlePage = () => {
             ))}
           </div>
           <div className="flex-1">
-            <h1 className="flex justify-center text-3xl font-bold -mb-4">{article.title}</h1>
+            {/* <h1 className="flex justify-center text-3xl font-bold -mb-4">{article.title}</h1> */}
             {article.content && article.content.split('\n').map((paragraph, pIndex) => (
               <p key={pIndex} className="mb-4 whitespace-pre-wrap">
                 {splitWordsAndPunctuation(`<p>${paragraph}</p>`).map((item, index) => (
