@@ -16,7 +16,7 @@ const DraggableWord = ({ word, disabled }) => {
       className={`inline-block px-0.5 py-0.5 rounded ${
         disabled
           ? 'text-black cursor-auto'
-          : 'text-blue-800 cursor-grab'
+          : 'text-black cursor-grab'
       }`}
     >
       {word}

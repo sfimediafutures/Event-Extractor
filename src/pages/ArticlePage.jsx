@@ -27,40 +27,45 @@ const articleData = [
 ];
 
 const requiredWordsForArticles = [
-  ["9.", "desember", "1982", "blir"], // Required words for the first article
-  ["wordA", "wordB", "wordC", "wordD"], // Required words for the second article
-  // Add more arrays for other articles
+  ["kvinne", "hjem i Louisiana", "9. desember 1982", "funnet voldtatt og knivstukket"], // Required words for the first article
+  ["Bella,", "London", "nylig", "pågrepet"], // Required words for the second article
+  ["elbil", "Norge", "om ganske kort tid", "skulle den vært på plass"],
+  ["mann", "videomøte", "torsdag ettermiddag", "drept"],
+  ["Guro Sandnes", "Oslo-politiet,", "20.48,", "masseslagsmål"]
 ];
 
 const splitWordsAndPunctuation = (htmlString) => {
-  // Create a temporary div to parse HTML
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = htmlString;
   
-  // Get text content while preserving spaces and line breaks
-  const paragraphs = tempDiv.getElementsByTagName('p');
-  let result = [];
-  Array.from(paragraphs).forEach((p, pIndex) => {
-    const text = p.textContent || p.innerText;
-    const regex = /(\S+)([.,!?;:"""«»]*)(\s*)/g;
-    let match;
-    
-    while ((match = regex.exec(text)) !== null) {
-      result.push({
-        word: match[1],
-        punctuation: match[2],
-        space: match[3]
-      });
-    }
-    
-    // Add a line break after each paragraph except the last one
-    if (pIndex < paragraphs.length - 1) {
-      result.push({ word: '', punctuation: '', space: '\n\n' });
+  const result = [];
+  const headers = ["H2", "H3"];
+  
+  tempDiv.childNodes.forEach((node) => {
+    if (headers.includes(node.nodeName)) {
+      // Push header text with type to distinguish it
+      result.push({ type: node.nodeName.toLowerCase(), content: node.textContent });
+    } else if (node.nodeName === "P") {
+      const text = node.textContent || node.innerText;
+      const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
+      let match;
+      
+      while ((match = regex.exec(text)) !== null) {
+        result.push({
+          type: "text",
+          word: match[1],
+          punctuation: match[2],
+          space: match[3]
+        });
+      }
+      
+      result.push({ type: "lineBreak" }); // Optional line break after paragraphs
     }
   });
   
   return result;
 };
+
 
 const fetchArticle = async (topicId) => {
   const selectedArticle = articleData[parseInt(topicId) - 1];
@@ -254,37 +259,43 @@ const ArticlePage = () => {
     <div className="flex flex-row min-h-screen bg-gray-100 p-6 px-4 gap-4">
       <Card className="w-3/4 mx-auto p-6 select-none">
       <h1 className="flex justify-left text-3xl font-bold -mb-4">{article.title}</h1>
-        <div className="flex mb-6">
-          <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/4 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8 mt-12">
+        <div className="flex mt-16 mb-6">
+          <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/4 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8">
             <div className="flex justify-between items-center mt-4">
               <div className="text-lg font-semibold">Time: {timer}s</div>
               <Button onClick={handleStartStop} className="bg-slate-500 text-slate-100">
                 {isTimerRunning ? "Ferdig" : "Start"}
               </Button>
             </div>
-            <p>Finn et event i første avsnitt og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
-            {["Hvem gjorde noe?", "Hvor skjedde det?", "Når skjedde det?", "Hva skjedde?"].map((label, index) => (
+            <p>Finn et event i første setningen og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
+            {["Hvem?", "Hvor skjer/skjedde det?", "Når skjer/skjedde det?", "Hva skjer/skjedde?"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                 {droppedWords[index] || label}
               </DropBox>
             ))}
           </div>
-          <div className="flex-1">
-            {/* <h1 className="flex justify-center text-3xl font-bold -mb-4">{article.title}</h1> */}
-            {article.content && article.content.split('\n').map((paragraph, pIndex) => (
-              <p key={pIndex} className="mb-4 whitespace-pre-wrap">
-                {splitWordsAndPunctuation(`<p>${paragraph}</p>`).map((item, index) => (
-                  <React.Fragment key={index}>
-                    <DraggableWord
-                      word={item.word}
-                      disabled={!isTimerRunning}
-                    />
-                    <span>{item.punctuation}</span>
-                    <span>{item.space}</span>
-                  </React.Fragment>
-                ))}
-              </p>
-            ))}
+          <div className="flex-1 text-black">
+            {article.content && splitWordsAndPunctuation(article.content).map((item, index) => {
+              if (item.type === "h2") {
+                return <h2 key={index} className="text-2xl font-bold mt-6 mb-2">{item.content}</h2>;
+              }
+              if (item.type === "h3") {
+                return <h3 key={index} className="text-xl font-semibold mt-4 mb-2">{item.content}</h3>;
+              }
+              if (item.type === "lineBreak") {
+                return <br key={index} />;
+              }
+              return (
+                <React.Fragment key={index}>
+                  <DraggableWord
+                    word={item.word}
+                    disabled={!isTimerRunning}
+                  />
+                  <span>{item.punctuation}</span>
+                  <span>{item.space}</span>
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
       </Card>
