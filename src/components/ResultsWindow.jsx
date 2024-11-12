@@ -4,6 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { InfoIcon } from 'lucide-react';
 import ModelInfo from '../pages/ModelInfo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
 const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
   const [name, setName] = useState('');
@@ -61,20 +63,20 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
       <Card className="p-6 max-w-lg w-full">
         {!showModelInfo ? (
           <>
-            <h2 className="text-2xl font-bold mb-4">Results</h2>
-            <p className="mb-4 text-lg">Your time: {time} seconds</p>
+            <h2 className="text-2xl font-bold mb-4">Resultater</h2>
+            <p className="mb-4 text-lg">Din tid: {time} sekunder</p>
             <h3 className="text-xl font-semibold mb-2">Highscores</h3>
             <ol className="list-none pl-0 mb-4">
               {topTimes.map((t, index) => renderTimeEntry(t, index))}
             </ol>
             {userRank > 15 && (
               <p className="mb-4">
-                Your rank: {userRank} - {savedTime ? savedTime.name : 'You'}: {time} seconds [{currentArticleTitle}]
+                Din plassering: {userRank} - {savedTime ? savedTime.name : 'You'}: {time} sekunder [{currentArticleTitle}]
               </p>
             )}
-            <Button variant="link" className="mb-4 text-md italic rounded-lg bg-slate-200 px-4 py-2 text-wrap h-auto text-left flex-row gap-4" onClick={() => setShowModelInfo(true)}>
-              <InfoIcon className="w-10 h-10" />
-              The Event Extractor model can complete this task in 4 seconds, saving you valuable time.
+            <Button variant="link" className="mb-4 text-md rounded-lg bg-slate-200 px-4 py-2 text-wrap h-auto text-left flex-row gap-3" onClick={() => setShowModelInfo(true)}>
+              <InfoIcon className="w-12 h-12" />
+              Språkmodellen hentet ut alle hendelsene i artikkelen på 4 sekunder! Vil du lære mer om det? Klikk her!
             </Button>
             <Input
               type="text"
@@ -87,7 +89,7 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
               <Button onClick={handleSave} disabled={!name.trim() || savedTime}>
                 {savedTime ? 'Time Saved' : 'Save Time'}
               </Button>
-              <Button onClick={handleBackToStart}>Back to Start</Button>
+              <Button onClick={handleBackToStart}><FontAwesomeIcon className="mr-2" icon={faHouse} />Tilbake </Button>
             </div>
           </>
         ) : (
@@ -97,7 +99,7 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
               <Button onClick={() => setShowModelInfo(false)}>
                 Back to Results
               </Button>
-              <Button onClick={handleBackToStart}>Back to Start</Button>
+              <Button onClick={handleBackToStart}><FontAwesomeIcon icon={faHouse} /></Button>
             </div>
           </>
         )}

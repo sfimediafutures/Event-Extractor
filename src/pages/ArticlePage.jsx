@@ -262,7 +262,7 @@ const ArticlePage = () => {
                 {isTimerRunning ? "Ferdig" : "Start"}
               </Button>
             </div>
-            <p>Finn et event i teksten og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
+            <p>Finn et event i første avsnitt og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
             {["Hvem gjorde noe?", "Hvor skjedde det?", "Når skjedde det?", "Hva skjedde?"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
                 {droppedWords[index] || label}
