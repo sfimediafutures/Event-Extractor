@@ -31,7 +31,7 @@ const requiredWordsForArticles = [
   [["Bella,", "Kona til Arsenal-spiller Sead Kolasinac"], "London Biggin Hill lufthavn", "nylig", "pågrepet"],
   [["Polestars første elbil", "Polestar 2"], "Norge", "om ganske kort tid", "skulle den vært på plass"],
   ["mann", ["videomøte", "Zoom"], "torsdag ettermiddag", "drept"],
-  [["Guro Sandnes", "TV 2", "operasjonsleder", "Oslo-politiet,", "ungdommene"], "Oslo-politiet,", ["20.48,", "fredag kveld", "21.15"], ["masseslagsmål", "slagsmålet.", "funnet", "fått en melding"]]
+  [["Guro Sandnes", "TV 2", "operasjonsleder", "Oslo-politiet,", "ungdommene"], "Oslo-politiet,", ["20.48,", "fredag kveld", "21.15"], ["ringte", "fortalte", "masseslagsmål", "slagsmålet.", "funnet", "fått en melding"]]
 ];
 
 const isWordCorrect = (index, word) => {
@@ -331,15 +331,15 @@ const ArticlePage = () => {
                         transition={{ duration: 0.5 }}
                         className="mb-4 p-3 bg-slate-50 rounded"
                       >
-                        <p className="font-semibold text-blue-600">{event.event_type}</p>
+                        <p className="font-semibold text-green-700">Event type: {event.event_type}</p>
                         {event.trigger && (
-                          <p className="text-sm mt-1">
+                          <p className="text-sm mt-1 text-green-800">
                             <span className="font-medium">Trigger:</span>{' '}
                             {event.trigger}
                           </p>
                         )}
                         {event.arguments && event.arguments.length > 0 && (
-                          <div className="mt-2">
+                          <div className="mt-2 p-2 bg-blue-100 rounded-lg text-blue-800">
                             <p className="font-medium text-sm">Arguments:</p>
                             <ul className="list-disc pl-5 text-sm">
                               {event.arguments.map((arg, argIndex) => (
