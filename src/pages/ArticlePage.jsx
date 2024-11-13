@@ -69,7 +69,7 @@ const splitWordsAndPunctuation = (htmlString) => {
         });
       }
       
-      result.push({ type: "lineBreak" }); // Optional line break after paragraphs
+      result.push({ type: "lineBreak" }, { type: "lineBreak" }); // Optional line break after paragraphs
     }
   });
   
@@ -212,20 +212,6 @@ const ArticlePage = () => {
     }
     return () => clearInterval(progressInterval);
   }, [isTimerRunning, progress]);
-
-  // const handleStartStop = () => {
-  //   if (isTimerRunning && droppedWords.every(word => word !== null)) {
-  //     setIsTimerRunning(false);
-  //     setShowResults(true);
-  //   } else if (!isTimerRunning) {
-  //     setIsTimerRunning(true);
-  //     setTimer(0);
-  //     setDroppedWords(Array(4).fill(null));
-  //     setProgress(0);
-  //     setModelDone(false);
-  //     setShowOverlay(false);
-  //   }
-  // };
 
   const handleStartStop = () => {
     if (isTimerRunning) {

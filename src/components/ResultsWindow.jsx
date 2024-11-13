@@ -117,7 +117,7 @@ import { Card } from '@/components/ui/card';
 import { InfoIcon } from 'lucide-react';
 import ModelInfo from '../pages/ModelInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faStopwatch, faTrophy, faMedal, faRankingStar } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faStopwatch, faTrophy, faMedal, faRankingStar, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
   const [name, setName] = useState('');
@@ -249,6 +249,7 @@ const ResultsWindow = ({ time, times, onSave, currentArticleTitle }) => {
             <ModelInfo />
             <div className="flex justify-between mt-4">
               <Button onClick={() => setShowModelInfo(false)}>
+                <FontAwesomeIcon icon={faArrowLeft} className='mr-2'/>
                 Tilbake til resultater
               </Button>
               <Button onClick={handleBackToStart}>
