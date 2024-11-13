@@ -34,6 +34,16 @@ const requiredWordsForArticles = [
   ["Guro Sandnes", "Oslo-politiet,", "20.48,", "masseslagsmål"]
 ];
 
+const isWordCorrect = (index, word) => {
+  if (!word) return false;
+  const articleIndex = parseInt(window.location.pathname.split('/')[2]) - 1;
+  const requiredWords = requiredWordsForArticles[articleIndex];
+  if (!requiredWords) return false;
+  
+  const required = requiredWords[index];
+  return Array.isArray(required) ? required.includes(word) : word === required;
+};
+
 const splitWordsAndPunctuation = (htmlString) => {
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = htmlString;
@@ -221,7 +231,9 @@ const ArticlePage = () => {
     if (isTimerRunning) {
       // Check if each dropped word matches the required word for the current article
       const requiredWords = requiredWordsForArticles[parseInt(topicId) - 1] || [];
-      const allCorrect = droppedWords.every((word, index) => word === requiredWords[index]);
+      const allCorrect = droppedWords.every((word, index) => {const required = requiredWords[index];
+      return Array.isArray(required) ? required.includes(word) : word === required;
+    });
   
       if (allCorrect) {
         setIsTimerRunning(false);
@@ -258,18 +270,18 @@ const ArticlePage = () => {
   return (
     <div className="flex flex-row min-h-screen bg-gray-100 p-6 px-4 gap-4">
       <Card className="w-3/4 mx-auto p-6 select-none">
-      <h1 className="flex justify-left text-3xl font-bold -mb-4">{article.title}</h1>
+        <h1 className="flex justify-left text-3xl font-bold -mb-4">{article.title}</h1>
         <div className="flex mt-16 mb-6">
           <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/4 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8">
             <div className="flex justify-between items-center mt-4">
-              <div className="text-lg font-semibold">Time: {timer}s</div>
+              <div className="text-lg font-semibold">Tid: {timer}s</div>
               <Button onClick={handleStartStop} className="bg-slate-500 text-slate-100">
                 {isTimerRunning ? "Ferdig" : "Start"}
               </Button>
             </div>
             <p>Finn et event i første setningen og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
-            {["Hvem?", "Hvor skjer/skjedde det?", "Når skjer/skjedde det?", "Hva skjer/skjedde?"].map((label, index) => (
-              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)}>
+            {["Hvem/Hva?", "Hvor skjer/skjedde det?", "Når skjer/skjedde det?", "Hva skjer/skjedde?"].map((label, index) => (
+              <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)} isCorrect={isWordCorrect(index, droppedWords[index])}>
                 {droppedWords[index] || label}
               </DropBox>
             ))}

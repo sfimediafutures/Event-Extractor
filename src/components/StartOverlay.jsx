@@ -13,7 +13,7 @@ const Overlay = ({ instruction, onStart, onClose }) => {
         <h2 className="text-xl font-bold mb-4">
           <FontAwesomeIcon icon={faStopwatch} />   Prøv å være raskere enn en språkmodell!   <FontAwesomeIcon icon={faStopwatch} />
         </h2> 
-        <div className="w-fit px-2 py-2 bg-slate-300 rounded-lg flex align-center justify-center"><p className="text-center">I denne demoen skal du konkurrere i «event extraction» mot en språkmodell som er utviklet av <a href="https://mediafutures.no/2021/10/18/huiling-you/" target="_blank" style={{ color: 'blue' }}>Huiling You</a>.</p></div><br/>
+        <div className="w-fit px-1 py-2 bg-slate-300 rounded-lg flex align-center justify-center"><p className="text-center">I denne demoen skal du konkurrere i «event extraction» mot en språkmodell som er utviklet av <a href="https://mediafutures.no/2021/10/18/huiling-you/" target="_blank" style={{ color: 'blue' }}>Huiling You</a>.</p></div><br/>
         <p className="mb-4 text-left">Du vil se teksten til artikkelen du har valgt. På venstre side er det fire bokser. Finn passende ord i artikkelens første setningen, og dra dem til de riktige boksene. Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.<br/></p>
         <p className="mb-4 text-left">På høyre side ser du språkmodellen som analyserer hele artikkelen og viser alle registrerte hendelser.</p>
         <p className="mb-4 text-left">En tidtaker starter når du klikker på knappen nedenfor. Lykke til!</p>
