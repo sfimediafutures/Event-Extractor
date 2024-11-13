@@ -27,11 +27,11 @@ const articleData = [
 ];
 
 const requiredWordsForArticles = [
-  ["kvinne", "hjem i Louisiana", "9. desember 1982", "funnet voldtatt og knivstukket"], // Required words for the first article
-  ["Bella,", "London", "nylig", "pågrepet"], // Required words for the second article
-  ["Polestars første elbil", "Norge", "om ganske kort tid", "skulle den vært på plass"],
-  ["mann", "videomøte", "torsdag ettermiddag", "drept"],
-  ["Guro Sandnes", "Oslo-politiet,", "20.48,", "masseslagsmål"]
+  ["kvinne", "hjem i Louisiana", "9. desember 1982", "funnet voldtatt og knivstukket"],
+  [["Bella,", "Kona til Arsenal-spiller Sead Kolasinac"], "London Biggin Hill lufthavn", "nylig", "pågrepet"],
+  [["Polestars første elbil", "Polestar 2"], "Norge", "om ganske kort tid", "skulle den vært på plass"],
+  ["mann", ["videomøte", "Zoom"], "torsdag ettermiddag", "drept"],
+  [["Guro Sandnes", "TV 2", "operasjonsleder", "Oslo-politiet,", "ungdommene"], "Oslo-politiet,", ["20.48,", "fredag kveld", "21.15"], ["masseslagsmål", "slagsmålet.", "funnet", "fått en melding"]]
 ];
 
 const isWordCorrect = (index, word) => {
@@ -39,10 +39,12 @@ const isWordCorrect = (index, word) => {
   const articleIndex = parseInt(window.location.pathname.split('/')[2]) - 1;
   const requiredWords = requiredWordsForArticles[articleIndex];
   if (!requiredWords) return false;
-  
+
   const required = requiredWords[index];
+  // Adjusted to support multiple valid words
   return Array.isArray(required) ? required.includes(word) : word === required;
 };
+
 
 const splitWordsAndPunctuation = (htmlString) => {
   const tempDiv = document.createElement('div');
@@ -57,7 +59,7 @@ const splitWordsAndPunctuation = (htmlString) => {
       result.push({ type: node.nodeName.toLowerCase(), content: node.textContent });
     } else if (node.nodeName === "P") {
       const text = node.textContent || node.innerText;
-      const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|Polestars\s+første\s+elbil|Polestar\s+2|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
+      const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|Polestars\s+første\s+elbil|Polestar\s+2|fått\s+en\s+melding|fredag\s+kveld|TV\s+2|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|London\s+Biggin\s+Hill\s+lufthavn|Kona\s+til\s+Arsenal-spiller\s+Sead Kolasinac|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
       let match;
       
       while ((match = regex.exec(text)) !== null) {
