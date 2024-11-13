@@ -19,7 +19,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-top bg-white-100 p-4 mt-20">
-      <img className="h-36 mb-10" src="src/img/MF_logo.png" alt="MediaFutures logo" />
+      <img className="h-36 mb-10" src="/MF_logo.png" alt="MediaFutures logo" />
       <h1 className="text-4xl font-bold mb-8 text-center">Velkommen til Event Extractor!</h1>
       <p className="text-xl text-gray-600 mb-8 text-center">Velg en artikkel som du synes høres interessant ut for å starte demoen</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
