@@ -29,7 +29,7 @@ const articleData = [
 const requiredWordsForArticles = [
   ["kvinne", "hjem i Louisiana", "9. desember 1982", "funnet voldtatt og knivstukket"], // Required words for the first article
   ["Bella,", "London", "nylig", "pågrepet"], // Required words for the second article
-  ["elbil", "Norge", "om ganske kort tid", "skulle den vært på plass"],
+  ["Polestars første elbil", "Norge", "om ganske kort tid", "skulle den vært på plass"],
   ["mann", "videomøte", "torsdag ettermiddag", "drept"],
   ["Guro Sandnes", "Oslo-politiet,", "20.48,", "masseslagsmål"]
 ];
@@ -57,7 +57,7 @@ const splitWordsAndPunctuation = (htmlString) => {
       result.push({ type: node.nodeName.toLowerCase(), content: node.textContent });
     } else if (node.nodeName === "P") {
       const text = node.textContent || node.innerText;
-      const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
+      const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|Polestars\s+første\s+elbil|Polestar\s+2|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
       let match;
       
       while ((match = regex.exec(text)) !== null) {
@@ -279,7 +279,7 @@ const ArticlePage = () => {
                 {isTimerRunning ? "Ferdig" : "Start"}
               </Button>
             </div>
-            <p>Finn et event i første setningen og dra riktig ord til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
+            <p>Finn en hendelse i første setningen og dra passende ord eller uttrykk til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
             {["Hvem/Hva?", "Hvor skjer/skjedde det?", "Når skjer/skjedde det?", "Hva skjer/skjedde?"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)} isCorrect={isWordCorrect(index, droppedWords[index])}>
                 {droppedWords[index] || label}

@@ -15,7 +15,7 @@ const DropBox = ({ index, children, onDrop, isCorrect }) => {
     <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      className={`border-2 border-dashed rounded p-4 h-24 flex items-center justify-center text-center transition-colors duration-300 ${
+      className={`border-2 border-dashed rounded-lg p-4 h-24 flex items-center justify-center text-center transition-colors duration-300 ${
         isCorrect 
           ? 'bg-green-100 border-green-500 text-green-800' 
           : 'bg-slate-100 border-none border-grey-300'
