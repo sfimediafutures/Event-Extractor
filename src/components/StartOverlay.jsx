@@ -15,8 +15,8 @@ const Overlay = ({ instruction, onStart, onClose }) => {
         </h2> 
         <div className="w-fit px-3 py-2 bg-slate-300 rounded-lg flex align-center justify-center -mb-1"><p className="text-center">I denne demoen skal du konkurrere i «event extraction» mot en språkmodell som er utviklet av <a href="https://mediafutures.no/2021/10/18/huiling-you/" target="_blank" style={{ color: 'blue' }}>Huiling You</a>.</p></div><br/>
         <p className="mb-4 text-left">Du vil se teksten til artikkelen du har valgt.</p>
-        <p className='mb-4 text-left'>På venstre side er det fire bokser. Finn passende ord eller uttrykk i artikkelens første setningen, og dra dem til riktige boksene. Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.<br/></p>
-        <p className="mb-4 text-left">På høyre side ser du språkmodellen som analyserer artikkelen og viser alle registrerte hendelser.</p>
+        <p className='mb-4 text-left'>På venstre side er det fire bokser. Finn passende ord eller uttrykk i artikkelens første setningen, og dra dem til riktige boksene. Klikk på "Ferdig" når alle bokser er grønne for å stoppe tidtakeren og se resultatene.<br/></p>
+        <p className="mb-4 text-left">På høyre side ser du språkmodellen som analyserer artikkelen og viser alle registrerte hendelser. Prøv å være raskere enn språkmodellen!</p>
         <p className="mb-4 text-left">En tidtaker starter når du klikker på knappen nedenfor. Lykke til!</p>
         <button
           className="mr-4 bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"

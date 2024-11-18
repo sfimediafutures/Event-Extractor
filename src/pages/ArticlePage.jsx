@@ -71,12 +71,65 @@ const splitWordsAndPunctuation = (htmlString) => {
         });
       }
       
-      result.push({ type: "lineBreak" }, { type: "lineBreak" }); // Optional line break after paragraphs
+      result.push({ type: "lineBreak" }); // Optional line break after paragraphs
     }
   });
   
   return result;
 };
+
+// const splitWordsAndPunctuation = (htmlString) => {
+//   const tempDiv = document.createElement('div');
+//   tempDiv.innerHTML = htmlString;
+
+//   const result = [];
+//   const headers = ["H2", "H3"];
+//   let isFirstSentence = true;
+//   let currentSentence = [];
+
+//   const processNode = (node) => {
+//     if (node.nodeType === Node.TEXT_NODE) {
+//       const text = node.textContent;
+//       const regex = /(\d{1,2}\.\s+[a-zæøåA-ZÆØÅ]+\s+\d{4}|Polestars\s+første\s+elbil|Polestar\s+2|fått\s+en\s+melding|fredag\s+kveld|TV\s+2|hjem\s+i\s+Louisiana|funnet\s+voldtatt\s+og\s+knivstukket|London\s+Biggin\s+Hill\s+lufthavn|Kona\s+til\s+Arsenal-spiller\s+Sead\s+Kolasinac|om\s+ganske\s+kort\s+tid|skulle\s+den\s+vært\s+på\s+plass|torsdag\s+ettermiddag|Guro\s+Sandnes|\S+)([.,!?;:"""«»]*)(\s*)/g;
+//       let match;
+      
+//       while ((match = regex.exec(text)) !== null) {
+//         const wordObj = {
+//           type: "text",
+//           word: match[1],
+//           punctuation: match[2],
+//           space: match[3]
+//         };
+
+//         if (isFirstSentence) {
+//           currentSentence.push(wordObj);
+//           if (match[2].includes('.') || match[2].includes('!') || match[2].includes('?')) {
+//             result.push({
+//               type: "firstSentence",
+//               content: currentSentence
+//             });
+//             isFirstSentence = false;
+//           }
+//         } else {
+//           result.push(wordObj);
+//         }
+//       }
+//     } else if (node.nodeType === Node.ELEMENT_NODE) {
+//       node.childNodes.forEach(child => processNode(child));
+//     }
+//   };
+
+//   tempDiv.childNodes.forEach((node) => {
+//     if (headers.includes(node.nodeName)) {
+//       result.push({ type: node.nodeName.toLowerCase(), content: node.textContent });
+//     } else if (node.nodeName === "P") {
+//       Array.from(node.childNodes).forEach(child => processNode(child));
+//       result.push({ type: "lineBreak" });
+//     }
+//   });
+
+//   return result;
+// };
 
 
 const fetchArticle = async (topicId) => {
@@ -258,7 +311,7 @@ const ArticlePage = () => {
   return (
     <div className="flex flex-row min-h-screen bg-gray-100 p-6 px-4 gap-4">
       <Card className="w-3/4 mx-auto p-6 select-none">
-        <h1 className="flex justify-left text-3xl font-bold -mb-4">{article.title}</h1>
+        <h1 className="flex justify-left text-3xl font-bold -mb-8 mt-2">{article.title}</h1>
         <div className="flex mt-16 mb-6">
           <div className="flex-none flex flex-col justify-top gap-4 min-w-36 w-1/4 h-fit bg-slate-300 rounded-lg px-4 py-2 pb-4 mr-8">
             <div className="flex justify-between items-center mt-4">
@@ -267,7 +320,7 @@ const ArticlePage = () => {
                 {isTimerRunning ? "Ferdig" : "Start"}
               </Button>
             </div>
-            <p>Finn en hendelse i første setningen og dra passende ord eller uttrykk til riktig boks! Klikk på "Ferdig" når du har fylt alle bokser for å stoppe tidtakeren og se resultatene.</p>
+            <p>Finn en hendelse i første setningen.<br/>Dra passende ord eller uttrykk til riktig boks.<br/>Klikk på "Ferdig" når alle bokser er grønne for å stoppe tidtakeren og se resultatene.</p>
             {["Hvem/Hva?", "Hvor skjer/skjedde det?", "Når skjer/skjedde det?", "Hva skjer/skjedde?"].map((label, index) => (
               <DropBox key={index} index={index + 1} onDrop={(word) => handleDrop(index, word)} isCorrect={isWordCorrect(index, droppedWords[index])}>
                 {droppedWords[index] || label}
@@ -284,6 +337,20 @@ const ArticlePage = () => {
               }
               if (item.type === "lineBreak") {
                 return <br key={index} />;
+              }
+              if (item.type === "firstSentence") {
+                // Render the first sentence with a special background
+                return (
+                  <div key={index} className="bg-amber-200 p-2 rounded-lg -mb-2 w-fit">
+                    {item.content.map((subItem, subIndex) => (
+                      <React.Fragment key={subIndex}>
+                        <DraggableWord word={subItem.word} disabled={!isTimerRunning} />
+                        <span>{subItem.punctuation}</span>
+                        <span>{subItem.space}</span>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                );
               }
               return (
                 <React.Fragment key={index}>
