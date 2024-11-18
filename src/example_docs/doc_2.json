@@ -1,0 +1,206 @@
+{
+ "doc_id": "TV2-11464661",
+ "title": "Fotballfrue pågrepet med våpen på flyplass",
+ "body_text": "<p>Kona til Arsenal-spiller Sead Kolasinac, Bella, ble nylig pågrepet på London Biggin Hill lufthavn etter å ha landet med et fly fra Frankfurt.</p><p></p><p>Med seg i bagasjen hadde fotballfruen et elektrosjokkvåpen som gikk til anskaffelse av etter at Kolasinac og Arsenal-kamerat Mesut Özil ble <a href=\"https://www.tv2.no/a/10743324/\">truet med kniv i London</a> i fjor sommer. Ranerne ble jaget bort av Kolasinac.</p><p>Bella skal ifølge <a target=\"_blank\" href=\"https://www.thesun.co.uk/sport/11689999/kolasinac-wife-stun-gun-arsenal/\">The Sun</a> ha hatt tillatelse til å ha elektrosjokkvåpenet i Tyskland etter hendelsen, men tillatelsen gjelder ikke i Storbitannia</p><p><strong>– Dette er en misforståelse. Elektrosjokkvåpenet var i bagasjen, men hadde ikke batterier, sier en talsperson for Kolasinac til <a target=\"_blank\" href=\"https://www.thesun.co.uk/sport/11689999/kolasinac-wife-stun-gun-arsenal/\">The Sun</a>.</strong></p><p>Import av ulovlig våpen kan straffes med seks måneder i fengsel. Bella Kolasinac ble løslatt mot kausjon.</p><p>Bella skal ifølge talspersonen ha søkt om å få importert våpenet.</p><p>– Dessverre var hun i luften med telefonen avslått da hun mottok svaret om at det var ulovlig, sier talspersonen til den engelske tabloidavisen.</p><p>Tollerne skal ha vært klar over våpenet da fotballfruen landet i London.</p><p><strong>– Hun klarerte det ikke i tro på at hun ikke hadde gjort noe galt. Disse enhetene kan bæres lovlig i en veske i Tyskland dersom eieren har tillatelse. Hun veldig opptatt av sikkerheten etter hva som skjedde med Sead og Mesut, sier talspersonen til Kolasinac.</strong></p><p>Bare noen få uker senere etter den første episoden med knivtrusselen opplevde Kolasinac og Özil en <a href=\"https://www.tv2.no/a/10769255/\">ny hendelse</a>.</p><p><strong>To personer ble i august i fjor <a href=\"https://www.tv2.no/a/10771876/\">pågrepet etter å ha oppsøkt Özil</a> ved tyskerens hjem i London. De tilsto ran og ble dømt til ti år i fengsel.</strong></p><p>Arsenal skal ha<a href=\"https://www.tv2.no/a/10744939/\"> tilbudt de to stjernene psykologhjelp</a> etter hendelsene.</p>",
+ "publish_date": "2020-05-25",
+ "events": [
+  {
+   "event_type": "ARRESTERE",
+   "trigger": "pågrepet",
+   "arguments": [
+    [
+     "person",
+     "Kona til Arsenal-spiller Sead Kolasinac, Bella"
+    ],
+    [
+     "sted",
+     "London Biggin Hill lufthavn"
+    ],
+    [
+     "tid",
+     "nylig"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "landet",
+   "arguments": [
+    [
+     "fremkomstmiddel",
+     "et fly fra Frankfurt"
+    ],
+    [
+     "destinasjon",
+     "London Biggin Hill lufthavn"
+    ],
+    [
+     "tid",
+     "nylig"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "anskaffe",
+   "arguments": [
+    [
+     "kjøper",
+     "fotballfruen"
+    ],
+    [
+     "ting",
+     "et elektrosjokkvåpen som gikk til anskaffelse av etter at Kolasinac og Arsenal-kamerat Mesut Özil ble truet med kniv i London i fjor sommer"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "truet",
+   "arguments": [
+    [
+     "mål",
+     "Kolasinac og Arsenal-kamerat Mesut Özil"
+    ],
+    [
+     "sted",
+     "London"
+    ],
+    [
+     "tid",
+     "i fjor sommer"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "jaget",
+   "arguments": [
+    [
+     "ting",
+     "Ranerne"
+    ],
+    [
+     "initiativtaker",
+     "Kolasinac"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "Import",
+   "arguments": [
+    [
+     "ting",
+     "ulovlig våpen"
+    ]
+   ]
+  },
+  {
+   "event_type": "ARRESTERE",
+   "trigger": "fengsel",
+   "arguments": []
+  },
+  {
+   "event_type": "LØSLATE_PRØVE",
+   "trigger": "løslatt",
+   "arguments": [
+    [
+     "person",
+     "Bella Kolasinac"
+    ]
+   ]
+  },
+  {
+   "event_type": "OVERFØRE_EIERSKAP",
+   "trigger": "importert",
+   "arguments": [
+    [
+     "ting",
+     "våpenet"
+    ],
+    [
+     "kjøper",
+     "Bella"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "landet",
+   "arguments": [
+    [
+     "destinasjon",
+     "London"
+    ],
+    [
+     "ting",
+     "fotballfruen"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "knivtrusselen",
+   "arguments": []
+  },
+  {
+   "event_type": "ARRESTERE",
+   "trigger": "pågrepet",
+   "arguments": [
+    [
+     "person",
+     "To personer"
+    ],
+    [
+     "tid",
+     "august i fjor"
+    ],
+    [
+     "forbrytelse",
+     "oppsøkt Özil ved tyskerens hjem i London"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "besøkt",
+   "arguments": [
+    [
+     "ting",
+     "Özil"
+    ],
+    [
+     "sted",
+     "tyskerens hjem i London"
+    ],
+    [
+     "tid",
+     "august i fjor"
+    ],
+    [
+     "initiativtaker",
+     "To personer"
+    ]
+   ]
+  },
+  {
+   "event_type": "DØMME",
+   "trigger": "dømt",
+   "arguments": [
+    [
+     "tiltalte",
+     "De"
+    ],
+    [
+     "forbrytelse",
+     "ran"
+    ],
+    [
+     "dom",
+     "ti år i fengsel"
+    ]
+   ]
+  }
+ ]
+}

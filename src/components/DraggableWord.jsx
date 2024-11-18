@@ -13,10 +13,10 @@ const DraggableWord = ({ word, disabled }) => {
     <span
       draggable={!disabled}
       onDragStart={handleDragStart}
-      className={`inline-block px-2 py-1 rounded m-1 ${
+      className={`inline-block px-0.5 py-0.5 rounded ${
         disabled
-          ? 'bg-gray-200 text-gray-500 cursor-auto'
-          : 'bg-blue-100 text-blue-800 cursor-grab'
+          ? 'text-black cursor-auto'
+          : 'text-black cursor-grab'
       }`}
     >
       {word}

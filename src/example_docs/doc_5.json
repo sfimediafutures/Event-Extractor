@@ -1,0 +1,269 @@
+{
+ "doc_id": "TV2-11462441",
+ "title": "Mann (72) knivdrept i videomøte",
+ "body_text": "<p>Ifølge britiske <a href=\"https://www.bbc.com/news/world-us-canada-52767764\">BBC </a>ble en 72 år gammel mann drept av sin egen sønn (32) da han deltok i et videomøte på tjenesten Zoom torsdag ettermiddag.</p><p></p><p>Ifølge nyhetskanalen er det ikke kjent hvilket type møte 72-åringen deltok i, og ifølge dem er det usikkert i hvilken grad deltakerne så den kriminelle handlingen ble begått. Flere deltakere skal ha ringt politiet da de oppdaget at vedkommende hadde falt.</p><h2>– De gjorde det rette</h2><p>Ifølge nyhetskanalen var det andre 20 deltakere i videomøtet. Ifølge BBC flyktet sønnen ut et av vinduene i boligen og forlot åstedet etter handlingen. Flere av deltakerne ringte politiet, og 32-åringen ble pågrepet rundt en time etterpå.</p><p></p><p>– De gjorde det rette. De var alle bekymret for vennen sin. Det er fryktelig at de måtte bli vitne til dette, sier Kevin Beyrer i det lokale politiet til <a href=\"https://www.washingtonpost.com/nation/2020/05/22/zoom-stabbing-coronavirus/\">The Washington Post.</a></p><h2>Ble skadet i fall</h2><p>Sønnen er senere fraktet til sykehus for mindre skader han fikk da han hoppet ut vinduet, skriver <a href=\"https://abcnews.go.com/US/son-allegedly-stabs-father-death-zoom-video-chat/story?id=70826912\">ABC News.</a></p><p></p><p>– Laken ble skjært i stykker av en mann som tilsynelatende var naken, sier et vitne til TV-kanalen <a href=\"https://abc7ny.com/zoom-thomas-powers-murer-son-kills-father/6202241/\">WABC</a>. Vitnet uttaler at det så ut som at mannen dekket til noe.</p><h2>Ukjent motiv</h2><p>Ifølge politiet, som har siktet sønnen for drap, tok det en stund for deltakerne i videomøtet å finne ut hvor 72-åringen bodde for å lokalisere hvor den kriminelle handlingen hadde skjedd. Ifølge WABC tok det rundt et kvarter før deltakerne greide å resonnere seg frem til hvor den drepte mannen bodde. Motivet for drapet i New York er foreløpig ikke kjent.</p><h2>Har fått kritikk</h2><p>Ifølge <a href=\"https://www.washingtonpost.com/nation/202a0/05/22/zoom-stabbing-coronavirus/\">The Washington Post</a> er videotjenesten Zoom blitt hyppig brukt verden over under koronaviruspandemien som følge av restriksjoner og kanselleringer. Tjenesten har tidligere fått kritikk for sikkerhetsproblemer og muligheten uvedkommende har for å sabotere møter. Deriblant har det skjedd eksempler på at personer har kommet seg inn på møter for å spre rasistiske, ekstremistiske og pornografiske bilder. Tidligere i mai opplevde blant annet Norges Cykleforbund dette, da skjermen deres ble kuppet, og det ble <a href=\"https://www.tv2.no/a/11435799/\">delt grove overgrepsbilder.</a></p><p></p><p>Tjenesten har som følge av kritikken lansert en 90-dagers plan for å fikse problemene, og har gjennomført oppdateringer for å hindre uvedkommende adgang. Ifølge avisa hendelsen i New York trolig det første drapet som skjer under et Zoom-møte under pandemien.</p>",
+ "publish_date": "2020-05-22",
+ "events": [
+  {
+   "event_type": "DØ",
+   "trigger": "drept",
+   "arguments": [
+    [
+     "offer",
+     "en 72 år gammel mann"
+    ],
+    [
+     "initiativtaker",
+     "sin egen sønn ( 32 )"
+    ],
+    [
+     "tid",
+     "torsdag ettermiddag"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "videomøte",
+   "arguments": [
+    [
+     "entitet",
+     "han"
+    ],
+    [
+     "tid",
+     "torsdag ettermiddag"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "møte",
+   "arguments": [
+    [
+     "entitet",
+     "72-åringen"
+    ]
+   ]
+  },
+  {
+   "event_type": "SKADE",
+   "trigger": "falt",
+   "arguments": [
+    [
+     "offer",
+     "vedkommende"
+    ]
+   ]
+  },
+  {
+   "event_type": "RINGE_SKRIVE",
+   "trigger": "ringt",
+   "arguments": [
+    [
+     "entitet",
+     "Flere deltakere"
+    ],
+    [
+     "entitet",
+     "politiet"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "videomøtet",
+   "arguments": [
+    [
+     "entitet",
+     "andre 20 deltakere"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "forlot",
+   "arguments": [
+    [
+     "opphavssted",
+     "åstedet"
+    ],
+    [
+     "ting",
+     "sønnen"
+    ]
+   ]
+  },
+  {
+   "event_type": "RINGE_SKRIVE",
+   "trigger": "ringte",
+   "arguments": [
+    [
+     "entitet",
+     "Flere av deltakerne"
+    ],
+    [
+     "entitet",
+     "politiet"
+    ],
+    [
+     "tid",
+     "rundt en time etterpå"
+    ]
+   ]
+  },
+  {
+   "event_type": "ARRESTERE",
+   "trigger": "pågrepet",
+   "arguments": [
+    [
+     "person",
+     "32-åringen"
+    ],
+    [
+     "tid",
+     "rundt en time etterpå"
+    ],
+    [
+     "initiativtaker",
+     "politiet"
+    ]
+   ]
+  },
+  {
+   "event_type": "TRANSPORTERE",
+   "trigger": "fraktet",
+   "arguments": [
+    [
+     "ting",
+     "Sønnen"
+    ],
+    [
+     "destinasjon",
+     "sykehus"
+    ]
+   ]
+  },
+  {
+   "event_type": "SKADE",
+   "trigger": "skader",
+   "arguments": [
+    [
+     "offer",
+     "han"
+    ],
+    [
+     "sted",
+     "ut vinduet"
+    ]
+   ]
+  },
+  {
+   "event_type": "ANGRIPE",
+   "trigger": "skjært i stykker",
+   "arguments": [
+    [
+     "mål",
+     "Laken"
+    ],
+    [
+     "angriper",
+     "en mann som tilsynelatende var naken"
+    ]
+   ]
+  },
+  {
+   "event_type": "SIKTE",
+   "trigger": "siktet",
+   "arguments": [
+    [
+     "tiltalte",
+     "sønnen"
+    ],
+    [
+     "forbrytelse",
+     "drap"
+    ],
+    [
+     "aktor",
+     "politiet, som har siktet sønnen for drap"
+    ]
+   ]
+  },
+  {
+   "event_type": "DØ",
+   "trigger": "drap",
+   "arguments": []
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "videomøtet",
+   "arguments": [
+    [
+     "entitet",
+     "deltakerne i videomøtet"
+    ]
+   ]
+  },
+  {
+   "event_type": "DØ",
+   "trigger": "drepte",
+   "arguments": [
+    [
+     "offer",
+     "den drepte mannen"
+    ]
+   ]
+  },
+  {
+   "event_type": "DØ",
+   "trigger": "drapet",
+   "arguments": [
+    [
+     "sted",
+     "New York"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "møter",
+   "arguments": [
+    [
+     "entitet",
+     "uvedkommende"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "møter",
+   "arguments": [
+    [
+     "entitet",
+     "personer"
+    ]
+   ]
+  },
+  {
+   "event_type": "DØ",
+   "trigger": "drapet",
+   "arguments": [
+    [
+     "sted",
+     "New York"
+    ]
+   ]
+  },
+  {
+   "event_type": "MØTE",
+   "trigger": "Zoom-møte",
+   "arguments": [
+    [
+     "entitet",
+     "deltakerne"
+    ]
+   ]
+  }
+ ]
+}
