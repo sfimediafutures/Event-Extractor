@@ -4,10 +4,10 @@ This demo was created with help from Lovable (https://lovable.dev/).
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/sfimediafutures/Event-Extractor.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd Event-Extractor
 
 # Step 3: Install the necessary dependencies.
 npm install
